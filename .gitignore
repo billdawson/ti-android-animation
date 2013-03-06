@@ -1,0 +1,11 @@
+*.swp
+libs
+tmp
+bin
+build
+.apt_generated
+dist
+build.properties
+.settings
+platform
+
