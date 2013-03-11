@@ -18,8 +18,8 @@ import android.view.View;
 
 public class ViewWrapper {
 	private static final String TAG = "ViewWrapper";
-	private static final String COLOR_DRAWABLE_STATE_VAR = "mState";
-	private static final String COLOR_DRAWABLE_USE_COLOR_VAR = "mUseColor";
+	// private static final String COLOR_DRAWABLE_STATE_VAR = "mState";
+	// private static final String COLOR_DRAWABLE_USE_COLOR_VAR = "mUseColor";
 	private final View mView;
 
 	public ViewWrapper(View v) {

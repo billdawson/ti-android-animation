@@ -10,6 +10,8 @@ import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 
+import com.nineoldandroids.animation.ValueAnimator;
+
 @Kroll.module(name = "Androidanimation", id = "com.billdawson.timodules.animation")
 public class AndroidanimationModule extends KrollModule {
 
@@ -27,6 +29,30 @@ public class AndroidanimationModule extends KrollModule {
 	public static final int FLOAT_EVALUATOR = 2;
 	@Kroll.constant
 	public static final int ARGB_EVALUATOR = 3;
+
+	@Kroll.constant
+	public static final int INFINITE = ValueAnimator.INFINITE;
+	@Kroll.constant
+	public static final int RESTART = ValueAnimator.RESTART;
+	@Kroll.constant
+	public static final int REVERSE = ValueAnimator.REVERSE;
+
+	@Kroll.constant
+	public static final int ACCELERATE_INTERPOLATOR = 1;
+	@Kroll.constant
+	public static final int DECELERATE_INTERPOLATOR = 2;
+	@Kroll.constant
+	public static final int ACCELERATE_DECELERATE_INTERPOLATOR = 3;
+	@Kroll.constant
+	public static final int ANTICIPATE_INTERPOLATOR = 4;
+	@Kroll.constant
+	public static final int ANTICIPATE_OVERSHOOT_INTERPOLATOR = 5;
+	@Kroll.constant
+	public static final int BOUNCE_INTERPOLATOR = 6;
+	@Kroll.constant
+	public static final int CYCLE_INTERPOLATOR = 7;
+	@Kroll.constant
+	public static final int OVERSHOOT_INTERPOLATOR = 8;
 
 	public AndroidanimationModule() {
 		super();
