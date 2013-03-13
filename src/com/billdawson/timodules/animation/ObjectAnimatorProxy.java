@@ -189,7 +189,7 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			mPropertyType = PropertyDataType.INT;
 		}
 
-		if (values == null || values.length == 0) {
+		if (values == null || values.length == 0 || values[0] == null) {
 			mIntValues = null;
 			return;
 		}
@@ -198,7 +198,7 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			values = (Object[]) values[0];
 		}
 
-		if (values == null || values.length == 0) {
+		if (values.length == 0) {
 			mIntValues = null;
 			return;
 		}
@@ -230,6 +230,15 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 		}
 
 		if (values == null || values.length == 0 || values[0] == null) {
+			mFloatValues = null;
+			return;
+		}
+
+		if (values[0].getClass().isArray()) {
+			values = (Object[]) values[0];
+		}
+
+		if (values.length == 0) {
 			mFloatValues = null;
 			return;
 		}

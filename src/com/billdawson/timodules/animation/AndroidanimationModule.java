@@ -53,6 +53,8 @@ public class AndroidanimationModule extends KrollModule {
 	public static final int CYCLE_INTERPOLATOR = 7;
 	@Kroll.constant
 	public static final int OVERSHOOT_INTERPOLATOR = 8;
+	@Kroll.constant
+	public static final int LINEAR_INTERPOLATOR = 9;
 
 	public AndroidanimationModule() {
 		super();
