@@ -4,6 +4,7 @@ import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIView;
@@ -22,6 +23,8 @@ import android.view.animation.OvershootInterpolator;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.billdawson.timodules.animation.views.ViewWrapper;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.animation.ArgbEvaluator;
 import com.nineoldandroids.animation.FloatEvaluator;
 import com.nineoldandroids.animation.IntEvaluator;
@@ -32,12 +35,17 @@ enum PropertyDataType {
 }
 
 @Kroll.proxy(creatableInModule = AndroidanimationModule.class)
-public class ObjectAnimatorProxy extends KrollProxy {
+public class ObjectAnimatorProxy extends KrollProxy implements AnimatorListener {
 	private static final String TAG = "ObjectAnimatorProxy";
+	private static final long DEFAULT_DURATION = 300;
 	private static final AnimationUtils utils = AnimationUtils.getInstance();
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
 	private static final String ERR_FLOAT_VALUE = "Values must be set to numeric array";
 	private static final String ERR_INT_VALUE = "Values must be set to numeric array or array of strings containing color codes.";
+	private static final String WARN_ACTIVITY = "The current Activity could not be determined. No animation will be started.";
+	private static final String WARN_ANIMATOR = "An Android Animator object could not be built. No animation will be started.";
+	private static final String EVENT_END = "end";
+	private static final String EVENT_REPEAT = "repeat";
 
 	private ObjectAnimator mObjectAnimator = null;
 	private PropertyDataType mPropertyType;
@@ -45,7 +53,7 @@ public class ObjectAnimatorProxy extends KrollProxy {
 	private Object mTarget;
 	private float[] mFloatValues;
 	private int[] mIntValues;
-	private long mDuration = AndroidanimationModule.NO_LONG_VALUE;
+	private long mDuration = DEFAULT_DURATION;
 	private int mEvaluator = AndroidanimationModule.NO_INT_VALUE;
 	private long mStartDelay = AndroidanimationModule.NO_LONG_VALUE;
 	private int mRepeatCount = AndroidanimationModule.NO_INT_VALUE;
@@ -118,9 +126,11 @@ public class ObjectAnimatorProxy extends KrollProxy {
 		}
 
 		if (mObjectAnimator != null) {
-			if (mDuration != AndroidanimationModule.NO_LONG_VALUE) {
-				mObjectAnimator.setDuration(mDuration);
-			}
+
+			mObjectAnimator.setDuration(mDuration);
+
+			mObjectAnimator.removeAllListeners();
+			mObjectAnimator.addListener(this);
 
 			if (mStartDelay != AndroidanimationModule.NO_LONG_VALUE) {
 				mObjectAnimator.setStartDelay(mStartDelay);
@@ -216,9 +226,14 @@ public class ObjectAnimatorProxy extends KrollProxy {
 
 	// Kroll methods/properties
 	@Kroll.method
-	@Kroll.setProperty
-	public void setDuration(long milliseconds) {
+	public long getDuration() {
+		return mDuration;
+	}
+
+	@Kroll.method
+	public ObjectAnimatorProxy setDuration(long milliseconds) {
 		mDuration = milliseconds;
+		return this;
 	}
 
 	@Kroll.method
@@ -245,17 +260,34 @@ public class ObjectAnimatorProxy extends KrollProxy {
 						animator.start();
 					}
 				});
+			} else {
+				Log.w(TAG, WARN_ACTIVITY);
 			}
 
 		} else {
-			// TODO warn
+			Log.w(TAG, WARN_ANIMATOR);
 		}
 	}
 
 	@Kroll.method
-	public void stop() {
-		// TODO
+	public void reverse() {
+		final ObjectAnimator animator = getObjectAnimator();
+		if (animator != null) {
+			Activity activity = TiApplication.getAppCurrentActivity();
+			if (activity != null) {
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						animator.reverse();
+					}
+				});
+			} else {
+				Log.w(TAG, WARN_ACTIVITY);
+			}
 
+		} else {
+			Log.w(TAG, WARN_ANIMATOR);
+		}
 	}
 
 	@Kroll.method
@@ -269,6 +301,8 @@ public class ObjectAnimatorProxy extends KrollProxy {
 						mObjectAnimator.cancel();
 					}
 				});
+			} else {
+				Log.w(TAG, WARN_ACTIVITY.replace("started", "canceled"));
 			}
 		}
 	}
@@ -284,6 +318,8 @@ public class ObjectAnimatorProxy extends KrollProxy {
 						mObjectAnimator.end();
 					}
 				});
+			} else {
+				Log.w(TAG, WARN_ACTIVITY.replace("started", "ended"));
 			}
 		}
 	}
@@ -451,6 +487,37 @@ public class ObjectAnimatorProxy extends KrollProxy {
 			mInterpolatorValues[i] = ((Number) member).floatValue();
 		}
 
+	}
+
+	@Kroll.method
+	public boolean isRunning() {
+		return mObjectAnimator == null ? false : mObjectAnimator.isRunning();
+	}
+
+	@Kroll.method
+	public boolean isStarted() {
+		return mObjectAnimator == null ? false : mObjectAnimator.isStarted();
+	}
+
+	@Override
+	public void onAnimationCancel(Animator animation) {
+		fireEvent(TiC.EVENT_CANCEL, null);
+	}
+
+	@Override
+	public void onAnimationEnd(Animator animation) {
+		fireEvent(EVENT_END, null);
+
+	}
+
+	@Override
+	public void onAnimationRepeat(Animator animation) {
+		fireEvent(EVENT_REPEAT, null);
+	}
+
+	@Override
+	public void onAnimationStart(Animator animation) {
+		fireEvent(TiC.EVENT_START, null);
 	}
 
 }
