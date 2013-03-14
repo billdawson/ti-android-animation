@@ -4,12 +4,15 @@ package com.billdawson.timodules.animation;
  * TODOs
  * * Handling dps, etc.
  * * Optionally not change a TiView to a View (i.e., really animate the TiView's properties)
+ * * Further help for pre honeycomb, like reading new properties (rotation etc.)
+ * * Better support for Titanium-style proxy creation dictionaries (createXXX( {...} )
  */
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 
+import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactoryProxy;
 import com.nineoldandroids.animation.ValueAnimator;
 
 @Kroll.module(name = "Androidanimation", id = "com.billdawson.timodules.animation")
@@ -19,6 +22,7 @@ public class AndroidanimationModule extends KrollModule {
 	private static final String TAG = "AndroidanimationModule";
 
 	private static final ObjectAnimatorFactoryProxy mObjectAnimatorFactory = new ObjectAnimatorFactoryProxy();
+	private static final ViewPropertyAnimatorFactoryProxy mViewPropertyAnimatorFactory = new ViewPropertyAnimatorFactoryProxy();
 
 	public static final long NO_LONG_VALUE = Long.MIN_VALUE;
 	public static final int NO_INT_VALUE = Integer.MIN_VALUE;
@@ -64,11 +68,16 @@ public class AndroidanimationModule extends KrollModule {
 	public static void onAppCreate(TiApplication app) {
 	}
 
-	// Methods
 	@Kroll.method
 	@Kroll.getProperty
 	public ObjectAnimatorFactoryProxy getObjectAnimator() {
 		return mObjectAnimatorFactory;
+	}
+
+	@Kroll.method
+	@Kroll.getProperty
+	public ViewPropertyAnimatorFactoryProxy getView() {
+		return mViewPropertyAnimatorFactory;
 	}
 
 }
