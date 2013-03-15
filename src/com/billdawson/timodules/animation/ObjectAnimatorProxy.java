@@ -2,12 +2,11 @@ package com.billdawson.timodules.animation;
 
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
-import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIView;
 
-import android.app.Activity;
 import android.view.View;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
@@ -151,18 +150,12 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 		buildAnimator();
 		final ObjectAnimator animator = (ObjectAnimator) getAnimator();
 		if (animator != null) {
-			Activity activity = TiApplication.getAppCurrentActivity();
-			if (activity != null) {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						animator.reverse();
-					}
-				});
-			} else {
-				Log.w(TAG, WARN_ACTIVITY);
-			}
-
+			TiMessenger.postOnMain(new Runnable() {
+				@Override
+				public void run() {
+					animator.reverse();
+				}
+			});
 		} else {
 			Log.w(TAG, WARN_ANIMATOR);
 		}

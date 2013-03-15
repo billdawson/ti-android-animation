@@ -3,10 +3,8 @@ package com.billdawson.timodules.animation;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
-import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
-
-import android.app.Activity;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
@@ -18,7 +16,6 @@ public abstract class AnimatorProxy extends KrollProxy implements
 	private static final String TAG = "AnimatorProxy";
 	private static final long DEFAULT_DURATION = 300;
 
-	protected static final String WARN_ACTIVITY = "The current Activity could not be determined. No animation will be started.";
 	protected static final String WARN_ANIMATOR = "An Android Animator object could not be built. No animation will be started.";
 	public static final String EVENT_END = "end";
 	public static final String EVENT_REPEAT = "repeat";
@@ -76,34 +73,24 @@ public abstract class AnimatorProxy extends KrollProxy implements
 	@Kroll.method
 	public void cancel() {
 		if (mAnimator != null) {
-			Activity activity = TiApplication.getAppCurrentActivity();
-			if (activity != null) {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						mAnimator.cancel();
-					}
-				});
-			} else {
-				Log.w(TAG, WARN_ACTIVITY.replace("started", "canceled"));
-			}
+			TiMessenger.postOnMain(new Runnable() {
+				@Override
+				public void run() {
+					mAnimator.cancel();
+				}
+			});
 		}
 	}
 
 	@Kroll.method
 	public void end() {
 		if (mAnimator != null) {
-			Activity activity = TiApplication.getAppCurrentActivity();
-			if (activity != null) {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						mAnimator.end();
-					}
-				});
-			} else {
-				Log.w(TAG, WARN_ACTIVITY.replace("started", "ended"));
-			}
+			TiMessenger.postOnMain(new Runnable() {
+				@Override
+				public void run() {
+					mAnimator.end();
+				}
+			});
 		}
 	}
 
@@ -111,18 +98,12 @@ public abstract class AnimatorProxy extends KrollProxy implements
 	public void start() {
 		buildAnimator();
 		if (mAnimator != null) {
-			Activity activity = TiApplication.getAppCurrentActivity();
-			if (activity != null) {
-				activity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						mAnimator.start();
-					}
-				});
-			} else {
-				Log.w(TAG, WARN_ACTIVITY);
-			}
-
+			TiMessenger.postOnMain(new Runnable() {
+				@Override
+				public void run() {
+					mAnimator.start();
+				}
+			});
 		} else {
 			Log.w(TAG, WARN_ANIMATOR);
 		}
