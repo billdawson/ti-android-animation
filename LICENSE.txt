@@ -1,12 +1,17 @@
-======================================
-TiAndroid Animation Module
-Copyright 2013 Bill Dawson
-======================================
+=============================================================
+Android Animation for Titanium
+Copyright 2013 William Dawson
+Licensed under the Apache License, Version 2.0 (see below)
+
+This project makes extensive use of the...
+
 NineOldAndroids Android Library
 Copyright 2012 Jake Wharton
 http://nineoldandroids.com/
+Licensed under the Apache License, Version 2.0 (see below)
+==============================================================
 
-======================================
+
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
