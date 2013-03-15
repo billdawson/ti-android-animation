@@ -7,16 +7,8 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.TiC;
 
 import android.app.Activity;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.CycleInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.Interpolator;
-import android.view.animation.OvershootInterpolator;
 
+import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 
@@ -28,8 +20,8 @@ public abstract class AnimatorProxy extends KrollProxy implements
 
 	protected static final String WARN_ACTIVITY = "The current Activity could not be determined. No animation will be started.";
 	protected static final String WARN_ANIMATOR = "An Android Animator object could not be built. No animation will be started.";
-	private static final String EVENT_END = "end";
-	private static final String EVENT_REPEAT = "repeat";
+	public static final String EVENT_END = "end";
+	public static final String EVENT_REPEAT = "repeat";
 
 	private Object mTarget = null;
 	private long mStartDelay = AndroidanimationModule.NO_LONG_VALUE;
@@ -48,71 +40,6 @@ public abstract class AnimatorProxy extends KrollProxy implements
 
 	protected abstract void buildAnimator();
 
-	protected Interpolator buildInterpolator() {
-		final int valueCount = mInterpolatorValues == null ? 0
-				: mInterpolatorValues.length;
-
-		switch (mInterpolator) {
-		case AndroidanimationModule.ACCELERATE_DECELERATE_INTERPOLATOR:
-			return new AccelerateDecelerateInterpolator();
-
-		case AndroidanimationModule.ACCELERATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new AccelerateInterpolator(mInterpolatorValues[0]);
-			} else {
-				return new AccelerateInterpolator();
-			}
-
-		case AndroidanimationModule.ANTICIPATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new AnticipateInterpolator(mInterpolatorValues[0]);
-			} else {
-				return new AnticipateInterpolator();
-			}
-
-		case AndroidanimationModule.ANTICIPATE_OVERSHOOT_INTERPOLATOR:
-			if (valueCount == 0) {
-				return new AnticipateOvershootInterpolator();
-			} else if (valueCount == 1) {
-				return new AnticipateOvershootInterpolator(
-						mInterpolatorValues[0]);
-			} else {
-				return new AnticipateOvershootInterpolator(
-						mInterpolatorValues[0], mInterpolatorValues[1]);
-			}
-
-		case AndroidanimationModule.BOUNCE_INTERPOLATOR:
-			return new BounceInterpolator();
-
-		case AndroidanimationModule.CYCLE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new CycleInterpolator(mInterpolatorValues[0]);
-			} else {
-				Log.w(TAG,
-						"No values provided for Cycle Interpolator. Defaulting to 0.");
-				return new CycleInterpolator(0f);
-			}
-
-		case AndroidanimationModule.DECELERATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new DecelerateInterpolator(mInterpolatorValues[0]);
-			} else {
-				return new DecelerateInterpolator();
-			}
-
-		case AndroidanimationModule.OVERSHOOT_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new OvershootInterpolator(mInterpolatorValues[0]);
-			} else {
-				return new OvershootInterpolator();
-			}
-
-		default:
-			Log.w(TAG, "Unknown interpolator: " + mInterpolator);
-			return null;
-		}
-	}
-
 	protected void setCommonAnimatorProperties() {
 		if (mAnimator != null) {
 
@@ -126,7 +53,8 @@ public abstract class AnimatorProxy extends KrollProxy implements
 			}
 
 			if (mInterpolator != AndroidanimationModule.NO_INT_VALUE) {
-				mAnimator.setInterpolator(buildInterpolator());
+				mAnimator.setInterpolator(AnimationUtils.buildInterpolator(
+						mInterpolator, mInterpolatorValues));
 			}
 
 		}
@@ -227,6 +155,7 @@ public abstract class AnimatorProxy extends KrollProxy implements
 	public void setInterpolatorValues(Object values) {
 		if (values == null) {
 			mInterpolatorValues = null;
+			return;
 		}
 
 		if (!values.getClass().isArray()) {
@@ -235,21 +164,7 @@ public abstract class AnimatorProxy extends KrollProxy implements
 
 		Object[] arrayValues = (Object[]) values;
 
-		if (arrayValues.length == 0) {
-			mInterpolatorValues = null;
-		}
-
-		mInterpolatorValues = new float[arrayValues.length];
-
-		for (int i = 0; i < arrayValues.length; i++) {
-			Object member = arrayValues[i];
-			if (!(member instanceof Number)) {
-				throw new IllegalArgumentException(
-						"Interpolator values must be numeric.");
-			}
-			mInterpolatorValues[i] = ((Number) member).floatValue();
-		}
-
+		mInterpolatorValues = AnimationUtils.unboxFloatValues(arrayValues);
 	}
 
 	@Kroll.method

@@ -26,7 +26,6 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 	private static final String TAG = "ObjectAnimatorProxy";
 	private static final AnimationUtils utils = AnimationUtils.getInstance();
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
-	private static final String ERR_FLOAT_VALUE = "Values must be set to numeric array";
 	private static final String ERR_INT_VALUE = "Values must be set to numeric array or array of strings containing color codes.";
 
 	private PropertyDataType mPropertyType;
@@ -35,7 +34,6 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 	private int[] mIntValues;
 	private int mRepeatCount = AndroidanimationModule.NO_INT_VALUE;
 	private int mRepeatMode = AndroidanimationModule.NO_INT_VALUE;
-
 	private int mEvaluator = AndroidanimationModule.NO_INT_VALUE;
 
 	public ObjectAnimatorProxy() {
@@ -189,16 +187,7 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			mPropertyType = PropertyDataType.INT;
 		}
 
-		if (values == null || values.length == 0 || values[0] == null) {
-			mIntValues = null;
-			return;
-		}
-
-		if (values[0].getClass().isArray()) {
-			values = (Object[]) values[0];
-		}
-
-		if (values.length == 0) {
+		if (values == null || values.length == 0) {
 			mIntValues = null;
 			return;
 		}
@@ -229,29 +218,13 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			mPropertyType = PropertyDataType.FLOAT;
 		}
 
-		if (values == null || values.length == 0 || values[0] == null) {
+		if (values == null || values.length == 0) {
 			mFloatValues = null;
 			return;
 		}
 
-		if (values[0].getClass().isArray()) {
-			values = (Object[]) values[0];
-		}
+		mFloatValues = AnimationUtils.unboxFloatValues(values);
 
-		if (values.length == 0) {
-			mFloatValues = null;
-			return;
-		}
-
-		mFloatValues = new float[values.length];
-
-		for (int i = 0; i < values.length; i++) {
-			Object member = values[i];
-			if (!(member instanceof Number)) {
-				throw new IllegalArgumentException(ERR_FLOAT_VALUE);
-			}
-			mFloatValues[i] = ((Number) values[i]).floatValue();
-		}
 	}
 
 	@Kroll.method

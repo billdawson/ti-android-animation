@@ -2,6 +2,7 @@ package com.billdawson.timodules.animation;
 
 /**
  * TODOs
+ * * Redo ViewPropertyAnimatorProxy because calls to native ViewPropertyAnimator get launched right away on UI since we're calling from Kroll thread.
  * * Handling dps, etc.
  * * Optionally not change a TiView to a View (i.e., really animate the TiView's properties)
  * * Further help for pre honeycomb, like reading new properties (rotation etc.)
@@ -76,7 +77,7 @@ public class AndroidanimationModule extends KrollModule {
 
 	@Kroll.method
 	@Kroll.getProperty
-	public ViewPropertyAnimatorFactoryProxy getView() {
+	public ViewPropertyAnimatorFactoryProxy getViewPropertyAnimator() {
 		return mViewPropertyAnimatorFactory;
 	}
 

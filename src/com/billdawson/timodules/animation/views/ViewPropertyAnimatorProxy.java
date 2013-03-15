@@ -1,15 +1,28 @@
 package com.billdawson.timodules.animation.views;
 
+import java.lang.ref.WeakReference;
+
+import org.appcelerator.kroll.KrollDict;
+import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 
+import com.billdawson.timodules.animation.utils.AnimationUtils;
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
 @Kroll.proxy
-public class ViewPropertyAnimatorProxy extends KrollProxy {
+public class ViewPropertyAnimatorProxy extends KrollProxy implements
+		AnimatorListener {
 
-	private ViewPropertyAnimator mAnimator;
+	@SuppressWarnings("unused")
+	private static final String TAG = "ViewPropertyAnimatorProxy";
+
+	private ViewPropertyAnimator mAnimator = null;
+	private WeakReference<KrollFunction> mListener = null;
 
 	public ViewPropertyAnimatorProxy() {
 		super();
@@ -19,6 +32,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy {
 		this();
 		mAnimator = ViewPropertyAnimator.animate(view.getOrCreateView()
 				.getNativeView());
+		mAnimator.setListener(this);
 	}
 
 	@Kroll.method
@@ -56,14 +70,17 @@ public class ViewPropertyAnimatorProxy extends KrollProxy {
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy setInterpolator(int interpolator) {
-		// TODO
-		return this;
-	}
+	public ViewPropertyAnimatorProxy setInterpolator(int interpolator,
+			Object[] interpolatorValues) {
+		if (interpolatorValues != null && interpolatorValues.length > 0
+				&& interpolatorValues[0].getClass().isArray()) {
+			interpolatorValues = (Object[]) interpolatorValues[0];
+		}
 
-	@Kroll.method
-	public ViewPropertyAnimatorProxy setListener(Void v) {
-		// TODO -- a new variant of addEventListener?
+		float[] floatValues = AnimationUtils
+				.unboxFloatValues(interpolatorValues);
+		mAnimator.setInterpolator(AnimationUtils.buildInterpolator(
+				interpolator, floatValues));
 		return this;
 	}
 
@@ -183,6 +200,48 @@ public class ViewPropertyAnimatorProxy extends KrollProxy {
 	public ViewPropertyAnimatorProxy scaleYBy(float value) {
 		mAnimator.scaleYBy(value);
 		return this;
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy setListener(KrollFunction func) {
+		mListener = func == null ? null
+				: new WeakReference<KrollFunction>(func);
+		return this;
+	}
+
+	private void callListener(String eventName) {
+		if (mListener == null) {
+			return;
+		}
+
+		KrollFunction func = mListener.get();
+
+		if (func != null) {
+			KrollDict args = new KrollDict();
+			args.put(TiC.PROPERTY_NAME, eventName);
+			args.put(TiC.EVENT_PROPERTY_SOURCE, this);
+			func.call(this.getKrollObject(), args);
+		}
+	}
+
+	@Override
+	public void onAnimationCancel(Animator animator) {
+		callListener("cancel");
+	}
+
+	@Override
+	public void onAnimationEnd(Animator animator) {
+		callListener("end");
+	}
+
+	@Override
+	public void onAnimationRepeat(Animator animator) {
+		callListener("repeat");
+	}
+
+	@Override
+	public void onAnimationStart(Animator animator) {
+		callListener("start");
 	}
 
 }

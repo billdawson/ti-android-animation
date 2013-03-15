@@ -10,24 +10,18 @@ public class ObjectAnimatorFactoryProxy extends KrollProxy {
 
 	@Kroll.method
 	public ObjectAnimatorProxy ofFloat(Object object, String propertyName,
-			Object arg) {
-
-		if (arg == null || !arg.getClass().isArray()) {
-			arg = new Object[] { arg };
-		}
+			Object[] varArgs) {
 
 		return new ObjectAnimatorProxy(object, propertyName,
-				PropertyDataType.FLOAT, (Object[]) arg);
+				PropertyDataType.FLOAT, varArgs);
 	}
 
 	@Kroll.method
 	public ObjectAnimatorProxy ofInt(Object object, String propertyName,
-			Object arg) {
-		if (arg == null || !arg.getClass().isArray()) {
-			arg = new Object[] { arg };
-		}
+			Object[] varArgs) {
+
 		return new ObjectAnimatorProxy(object, propertyName,
-				PropertyDataType.INT, (Object[]) arg);
+				PropertyDataType.INT, varArgs);
 	}
 
 }
