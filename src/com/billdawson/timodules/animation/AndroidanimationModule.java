@@ -1,8 +1,23 @@
 package com.billdawson.timodules.animation;
 
+/*
+ * Copyright (C) 2013 William Dawson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  * TODOs
- * * Redo ViewPropertyAnimatorProxy because calls to native ViewPropertyAnimator get launched right away on UI since we're calling from Kroll thread.
  * * Handling dps, etc.
  * * Optionally not change a TiView to a View (i.e., really animate the TiView's properties)
  * * Further help for pre honeycomb, like reading new properties (rotation etc.)
@@ -11,7 +26,6 @@ package com.billdawson.timodules.animation;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.titanium.TiApplication;
 
 import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactoryProxy;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -63,10 +77,6 @@ public class AndroidanimationModule extends KrollModule {
 
 	public AndroidanimationModule() {
 		super();
-	}
-
-	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app) {
 	}
 
 	@Kroll.method

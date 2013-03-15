@@ -6,10 +6,11 @@ import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
-import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
+
+import android.os.Handler;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
@@ -20,9 +21,17 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 public class ViewPropertyAnimatorProxy extends KrollProxy implements
 		AnimatorListener {
 
-	@SuppressWarnings("unused")
-	private static final String TAG = "ViewPropertyAnimatorProxy";
 	private static final float NOVAL = Float.MIN_VALUE;
+
+	private Runnable mAnimationStarter = new Runnable() {
+		@Override
+		public void run() {
+			start();
+		}
+	};
+
+	private Handler mHandler = new Handler(TiMessenger.getRuntimeMessenger()
+			.getLooper());
 
 	private ViewPropertyAnimator mAnimator = null;
 	private WeakReference<KrollFunction> mListener = null;
@@ -64,18 +73,6 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy alpha(float value) {
-		alphaVal = value;
-		return this;
-	}
-
-	@Kroll.method
-	public ViewPropertyAnimatorProxy alphaBy(float value) {
-		alphaByVal = value;
-		return this;
-	}
-
-	@Kroll.method
 	public ViewPropertyAnimatorProxy setDuration(long milliseconds) {
 		mAnimator.setDuration(milliseconds);
 		return this;
@@ -110,6 +107,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 
 	@Kroll.method
 	public void start() {
+		mHandler.removeCallbacks(mAnimationStarter);
 		TiMessenger.postOnMain(new Runnable() {
 			@Override
 			public void run() {
@@ -203,123 +201,159 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	@Kroll.method
 	public void cancel() {
 		TiMessenger.postOnMain(new Runnable() {
-
 			@Override
 			public void run() {
-				doStart();
+				doCancel();
 			}
 		});
 	}
 
 	private void doCancel() {
-		// TODO
+		mAnimator.cancel();
+	}
+
+	private void scheduleStarter() {
+		mHandler.removeCallbacks(mAnimationStarter);
+		mHandler.post(mAnimationStarter);
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy alpha(float value) {
+		alphaVal = value;
+		scheduleStarter();
+		return this;
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy alphaBy(float value) {
+		alphaByVal = value;
+		scheduleStarter();
+		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy x(float value) {
 		xVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy xBy(float value) {
 		xByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy y(float value) {
 		yVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy yBy(float value) {
 		yByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotation(float value) {
 		rotationVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotationBy(float value) {
 		rotationByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotationX(float value) {
 		rotationXVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotationXBy(float value) {
 		rotationXByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotationY(float value) {
 		rotationYVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy rotationYBy(float value) {
 		rotationYByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy translationX(float value) {
 		translationXVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy translationXBy(float value) {
 		translationXByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy translationY(float value) {
 		translationYVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy translationYBy(float value) {
 		translationYByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy scaleX(float value) {
 		scaleXVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy scaleXBy(float value) {
 		scaleXByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy scaleY(float value) {
 		scaleYVal = value;
+		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy scaleYBy(float value) {
 		scaleYByVal = value;
+		scheduleStarter();
 		return this;
 	}
 
@@ -362,7 +396,6 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 
 	@Override
 	public void onAnimationStart(Animator animator) {
-		Log.d(TAG, "ONANIMATIONSTART");
 		callListener("start");
 	}
 
