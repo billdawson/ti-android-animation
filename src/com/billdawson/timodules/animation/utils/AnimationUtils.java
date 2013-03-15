@@ -20,8 +20,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.appcelerator.kroll.common.Log;
+import org.appcelerator.titanium.TiDimension;
 import org.appcelerator.titanium.proxy.TiViewProxy;
+import org.appcelerator.titanium.util.TiConvert;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AnticipateInterpolator;
@@ -39,9 +45,16 @@ public class AnimationUtils {
 		VIEW, GENERAL
 	}
 
+	public enum Axis {
+		X, Y
+	}
+
 	private static final String TAG = "AnimationUtils";
-	private static final AnimationUtils mAnimationUtils = new AnimationUtils();
 	private static final Map<ObjectType, Map<String, String>> mPropertyMap = new HashMap<ObjectType, Map<String, String>>();
+	private static final float POINT_DPI = 72F;
+	private static final float MM_INCH = 25.4F;
+	private static final float CM_INCH = 2.54F;
+
 	static {
 		mPropertyMap.put(ObjectType.VIEW, new HashMap<String, String>());
 		mPropertyMap.get(ObjectType.VIEW).put("opacity", "alpha");
@@ -50,11 +63,8 @@ public class AnimationUtils {
 	private AnimationUtils() {
 	};
 
-	public static AnimationUtils getInstance() {
-		return mAnimationUtils;
-	}
-
-	public String translatePropertyName(Object object, String tiPropertyName) {
+	public static String translatePropertyName(Object object,
+			String tiPropertyName) {
 		ObjectType objType = ObjectType.GENERAL;
 
 		// Currently we only have property name maps for mapping from Titanium
@@ -166,6 +176,50 @@ public class AnimationUtils {
 			Log.w(TAG, "Unknown interpolator: " + interpolatorType);
 			return null;
 		}
+	}
+
+	public static DisplayMetrics getDisplayMetrics(View view) {
+		DisplayMetrics metrics = new DisplayMetrics();
+		Activity host = (Activity) view.getContext();
+		host.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		return metrics;
+	}
+
+	public static float toPixels(DisplayMetrics metrics, Object value, Axis axis) {
+		TiDimension tiDimension = TiConvert.toTiDimension(value,
+				axis == Axis.X ? TiDimension.TYPE_WIDTH
+						: TiDimension.TYPE_HEIGHT);
+		return toPixels(metrics, tiDimension, axis);
+	}
+
+	public static float toPixels(DisplayMetrics metrics,
+			TiDimension tiDimension, Axis axis) {
+
+		int tiUnitSpecifier = tiDimension.getUnits();
+		float tiValue = Double.valueOf(tiDimension.getValue()).floatValue();
+		float axisDpi = axis == Axis.X ? metrics.xdpi : metrics.ydpi;
+
+		switch (tiUnitSpecifier) {
+		case TypedValue.COMPLEX_UNIT_PX:
+		case TiDimension.COMPLEX_UNIT_UNDEFINED:
+			return tiValue;
+		case TypedValue.COMPLEX_UNIT_DIP:
+			return metrics.density * tiValue;
+		case TypedValue.COMPLEX_UNIT_SP:
+			return metrics.scaledDensity * tiValue;
+		case TypedValue.COMPLEX_UNIT_PT:
+			return tiValue * (axisDpi / POINT_DPI);
+		case TypedValue.COMPLEX_UNIT_MM:
+			return (tiValue / MM_INCH) * axisDpi;
+		case TiDimension.COMPLEX_UNIT_CM:
+			return (tiValue / CM_INCH) * axisDpi;
+		case TypedValue.COMPLEX_UNIT_IN:
+			return tiValue * axisDpi;
+		}
+
+		Log.w(TAG,
+				"Dimension type passed to toPixels() is unknown; returning original value.");
+		return tiValue;
 	}
 
 }

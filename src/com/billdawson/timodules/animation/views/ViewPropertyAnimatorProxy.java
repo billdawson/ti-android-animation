@@ -25,10 +25,14 @@ import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiC;
 import org.appcelerator.titanium.proxy.TiViewProxy;
+import org.appcelerator.titanium.view.TiUIView;
 
 import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.view.View;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
+import com.billdawson.timodules.animation.utils.AnimationUtils.Axis;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.view.ViewPropertyAnimator;
@@ -38,6 +42,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 		AnimatorListener {
 
 	private static final float NOVAL = Float.MIN_VALUE;
+	private static final String ERR_VIEW_UNAVAILABLE = "A ViewPropertyAnimator cannot be created until the view it is to animate has been created.";
 
 	private Runnable mAnimationStarter = new Runnable() {
 		@Override
@@ -51,6 +56,8 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 
 	private ViewPropertyAnimator mAnimator = null;
 	private WeakReference<KrollFunction> mListener = null;
+
+	private DisplayMetrics mDisplayMetrics;
 
 	private float xVal = NOVAL;
 	private float xByVal = NOVAL;
@@ -77,14 +84,22 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	private float translationYVal = NOVAL;
 	private float translationYByVal = NOVAL;
 
-	public ViewPropertyAnimatorProxy() {
-		super();
-	}
-
 	public ViewPropertyAnimatorProxy(TiViewProxy view) {
-		this();
-		mAnimator = ViewPropertyAnimator.animate(view.getOrCreateView()
-				.getNativeView());
+		super();
+
+		TiUIView tiView = view.peekView();
+		if (tiView == null) {
+			throw new IllegalStateException(ERR_VIEW_UNAVAILABLE);
+		}
+
+		View nativeView = tiView.getNativeView();
+		if (nativeView == null) {
+			throw new IllegalStateException(ERR_VIEW_UNAVAILABLE);
+		}
+
+		mDisplayMetrics = AnimationUtils.getDisplayMetrics(nativeView);
+
+		mAnimator = ViewPropertyAnimator.animate(nativeView);
 		mAnimator.setListener(this);
 	}
 
@@ -233,6 +248,10 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 		mHandler.post(mAnimationStarter);
 	}
 
+	private float toPixels(Object value, Axis axis) {
+		return AnimationUtils.toPixels(mDisplayMetrics, value, axis);
+	}
+
 	@Kroll.method
 	public ViewPropertyAnimatorProxy alpha(float value) {
 		alphaVal = value;
@@ -248,29 +267,41 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy x(float value) {
-		xVal = value;
+	public ViewPropertyAnimatorProxy opacity(float value) {
+		// Convenience for those used to "opacity" in Titanium.
+		return alpha(value);
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy opacityBy(float value) {
+		// Convenience for those used to "opacity" in Titanium.
+		return alphaBy(value);
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy x(Object value) {
+		xVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy xBy(float value) {
-		xByVal = value;
+	public ViewPropertyAnimatorProxy xBy(Object value) {
+		xByVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy y(float value) {
-		yVal = value;
+	public ViewPropertyAnimatorProxy y(Object value) {
+		yVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy yBy(float value) {
-		yByVal = value;
+	public ViewPropertyAnimatorProxy yBy(Object value) {
+		yByVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
@@ -318,29 +349,29 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationX(float value) {
-		translationXVal = value;
+	public ViewPropertyAnimatorProxy translationX(Object value) {
+		translationXVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationXBy(float value) {
-		translationXByVal = value;
+	public ViewPropertyAnimatorProxy translationXBy(Object value) {
+		translationXByVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationY(float value) {
-		translationYVal = value;
+	public ViewPropertyAnimatorProxy translationY(Object value) {
+		translationYVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationYBy(float value) {
-		translationYByVal = value;
+	public ViewPropertyAnimatorProxy translationYBy(Object value) {
+		translationYByVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}

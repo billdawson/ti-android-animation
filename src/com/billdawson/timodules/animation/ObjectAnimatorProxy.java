@@ -39,7 +39,6 @@ enum PropertyDataType {
 @Kroll.proxy(creatableInModule = AndroidanimationModule.class)
 public class ObjectAnimatorProxy extends AnimatorProxy {
 	private static final String TAG = "ObjectAnimatorProxy";
-	private static final AnimationUtils utils = AnimationUtils.getInstance();
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
 	private static final String ERR_INT_VALUE = "Values must be set to numeric array or array of strings containing color codes.";
 
@@ -79,10 +78,11 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			}
 
 			Object target = getTarget();
-			String propertyName = utils.translatePropertyName(target,
+			String propertyName = AnimationUtils.translatePropertyName(target,
 					mPropertyName);
 
 			Object actualObject = target;
+
 			if (target instanceof TiViewProxy) {
 				TiUIView intermediateObject = ((TiViewProxy) target).peekView();
 				if (intermediateObject != null) {
