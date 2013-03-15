@@ -1,0 +1,3 @@
+- Better support for Titanium-style proxy creation dictionary for ObjectAnimator? (createObjectAnimator( {...} )?  (Honestly I don't care about that, but others might.)
+- Anvil unit tests.
+- Alloy?

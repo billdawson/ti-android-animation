@@ -16,14 +16,6 @@ package com.billdawson.timodules.animation;
  * limitations under the License.
  */
 
-/**
- * TODOs
- * * Handling dps, etc.
- * * Optionally not change a TiView to a View (i.e., really animate the TiView's properties)
- * * Further help for pre honeycomb, like reading new properties (rotation etc.)
- * * Better support for Titanium-style proxy creation dictionaries (createXXX( {...} )
- */
-
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
