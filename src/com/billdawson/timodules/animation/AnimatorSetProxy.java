@@ -75,6 +75,7 @@ public class AnimatorSetProxy extends AnimatorProxy {
 	}
 
 	@Kroll.method
+	@Kroll.getProperty
 	public AnimatorProxy[] getChildAnimations() {
 		return mChildAnimations;
 	}

@@ -90,6 +90,8 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 					if (actualObject != null
 							&& propertyName.equals(PROPERTY_BACKGROUND_COLOR)
 							&& mIntValues.length == 1) {
+						// There is no "getBackgroundColor" on Android views,
+						// so we wrap it.
 						actualObject = new ViewWrapper((View) actualObject);
 					}
 				} else {

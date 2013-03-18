@@ -16,8 +16,6 @@ package com.billdawson.timodules.animation.views;
  * limitations under the License.
  */
 
-import java.lang.ref.WeakReference;
-
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollProxy;
@@ -55,7 +53,9 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 			.getLooper());
 
 	private ViewPropertyAnimator mAnimator = null;
-	private WeakReference<KrollFunction> mListener = null;
+	private KrollFunction mListener = null;
+	private KrollFunction mStartAction = null;
+	private KrollFunction mEndAction = null;
 
 	private DisplayMetrics mDisplayMetrics;
 
@@ -406,23 +406,29 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 
 	@Kroll.method
 	public ViewPropertyAnimatorProxy setListener(KrollFunction func) {
-		mListener = func == null ? null
-				: new WeakReference<KrollFunction>(func);
+		mListener = func;
 		return this;
 	}
 
 	private void callListener(String eventName) {
-		if (mListener == null) {
+		if (mListener == null && mStartAction == null && mEndAction == null) {
 			return;
 		}
 
-		KrollFunction func = mListener.get();
+		KrollDict args = new KrollDict();
+		args.put(TiC.PROPERTY_NAME, eventName);
+		args.put(TiC.EVENT_PROPERTY_SOURCE, this);
 
-		if (func != null) {
-			KrollDict args = new KrollDict();
-			args.put(TiC.PROPERTY_NAME, eventName);
-			args.put(TiC.EVENT_PROPERTY_SOURCE, this);
-			func.call(this.getKrollObject(), args);
+		if (mListener != null) {
+			mListener.call(this.getKrollObject(), args);
+		}
+
+		if (eventName.equals("start") && mStartAction != null) {
+			mStartAction.call(this.getKrollObject(), args);
+		}
+
+		if (eventName.equals("end") && mEndAction != null) {
+			mEndAction.call(this.getKrollObject(), args);
 		}
 	}
 
@@ -444,6 +450,18 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	@Override
 	public void onAnimationStart(Animator animator) {
 		callListener("start");
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy withStartAction(KrollFunction function) {
+		mStartAction = function;
+		return this;
+	}
+
+	@Kroll.method
+	public ViewPropertyAnimatorProxy withEndAction(KrollFunction function) {
+		mEndAction = function;
+		return this;
 	}
 
 }
