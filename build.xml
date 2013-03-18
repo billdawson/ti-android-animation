@@ -7,4 +7,14 @@
 	<property file="build.properties" />
 
 	<import file="${titanium.platform}/../module/android/build.xml"/>
+
+	<property name="anvil.config" location="${basedir}/anvil/configSet/configs/animation"/>
+	<target name="test" depends="clean,dist">
+		<copy todir="${anvil.config}">
+			<fileset dir="${dist}" includes="*.zip"/>
+		</copy>
+		<exec dir="${anvil.driver}" executable="node">
+			<arg line="driver.js --sdk-version=${anvil.testSdkVersion} --command='start --config-set=animation'"/>
+		</exec>
+	</target>
 </project>
