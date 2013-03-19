@@ -1,39 +1,26 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
-
-
 // open a single window
 var win = Ti.UI.createWindow({
-	backgroundColor:'white'
-});
-var label = Ti.UI.createLabel();
-win.add(label);
-win.open();
+		backgroundColor:'white',
+		title: "Animation module tests"
+	}),
+	tests = [
+		{title: "Flip View", module: "flip"},
+		{title: "Cross fade", module: "crossfade"},
+	],
+	testList = Ti.UI.createTableView({minRowHeight:"48dp"}),
+	rows = [],
+	i = 0;
 
-// TODO: write your module tests here
-var AndroidAnimation = require('com.billdawson.timodules.animation');
-Ti.API.info("module is => " + AndroidAnimation);
-
-label.text = AndroidAnimation.example();
-
-Ti.API.info("module exampleProp is => " + AndroidAnimation.exampleProp);
-AndroidAnimation.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = AndroidAnimation.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
+for (; i < tests.length; i++) {
+	rows.push(
+		Ti.UI.createTableViewRow({title: tests[i].title})
+	);
 }
+
+testList.addEventListener("click", function(e) {
+	require(tests[e.index].module).run();
+});
+testList.setData(rows);
+win.add(testList);
+win.open();
 
