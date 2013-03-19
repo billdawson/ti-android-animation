@@ -17,4 +17,10 @@
 			<arg line="driver.js --platform=android --sdk-version=${anvil.testSdkVersion} --command='start --config-set=animation'"/>
 		</exec>
 	</target>
+	<target name="doc">
+		<exec dir="${basedir}/documentation" executable="markdown2"
+			output="${basedir}/documentation/index.html">
+			<arg line="index.md"/>
+		</exec>
+	</target>
 </project>
