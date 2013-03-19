@@ -7,9 +7,7 @@ exports.run = function() {
 		tableView = Ti.UI.createTableView({
 			top: "16dp", left: "16dp", right: "16dp", height: "200dp"
 		}),
-		english = ["One", "Two", "Three", "Four", "Five"],
-		german = ["Eins", "Zwei", "Drei", "Vier", "Fünf"],
-		currentList = english,
+		titles = ["One", "Two", "Three", "Four", "Five"],
 		rows = [],
 		i = 0,
 		buttonY = Ti.UI.createButton({
@@ -25,9 +23,9 @@ exports.run = function() {
 	w.add(buttonX);
 	w.add(buttonY);
 
-	for (; i < currentList.length; i++) {
+	for (; i < titles.length; i++) {
 		rows.push(
-			Ti.UI.createTableViewRow({title: currentList[i]})
+			Ti.UI.createTableViewRow({title: titles[i]})
 		);
 	}
 
@@ -36,12 +34,7 @@ exports.run = function() {
 	w.add(tableView);
 
 	function flipIt(e) {
-		currentList = currentList == english ? german : english;
-		var anim = animMod.viewPropertyAnimator.animate(tableView).withStartAction(function() {
-			for (var i = 0; i < currentList.length; i++) {
-				rows[i].title = currentList[i];
-			}
-		}).setDuration(2000);
+		var anim = animMod.viewPropertyAnimator.animate(tableView).setDuration(2000);
 
 		if (e.source == buttonX) {
 			anim.rotationXBy(360);
