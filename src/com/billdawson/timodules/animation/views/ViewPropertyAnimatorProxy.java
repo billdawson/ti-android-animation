@@ -420,7 +420,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 		}
 
 		KrollDict args = new KrollDict();
-		args.put(TiC.PROPERTY_NAME, eventName);
+		args.put(TiC.EVENT_PROPERTY_TYPE, eventName);
 		args.put(TiC.EVENT_PROPERTY_SOURCE, this);
 
 		if (mListener != null) {

@@ -14,9 +14,10 @@ if (Ti.Platform.osname === 'android') {
 		{name: "top_level_api"},
 		{name: "object_animator_api"},
 		{name: "animator_set_api"},
-		{name: "view_property_animator_api", timeout: 5000}
+		{name: "view_property_animator_api"},
 		// Functionality tests (i.e., animations put things in the 
 		// right place, etc.)
+		{name: "listeners"}
 	]);
 }
 
