@@ -76,14 +76,15 @@ public abstract class AnimatorProxy extends KrollProxy implements
 	// Public facing Kroll methods/properties.
 
 	@Kroll.method
+	@Kroll.getProperty
 	public long getDuration() {
 		return mDuration;
 	}
 
 	@Kroll.method
-	public AnimatorProxy setDuration(long milliseconds) {
+	@Kroll.setProperty
+	public void setDuration(long milliseconds) {
 		mDuration = milliseconds;
-		return this;
 	}
 
 	@Kroll.method
@@ -162,6 +163,12 @@ public abstract class AnimatorProxy extends KrollProxy implements
 		Object[] arrayValues = (Object[]) values;
 
 		mInterpolatorValues = AnimationUtils.unboxFloatValues(arrayValues);
+	}
+
+	@Kroll.method
+	@Kroll.getProperty
+	public float[] getInterpolatorValues() {
+		return mInterpolatorValues;
 	}
 
 	@Kroll.method

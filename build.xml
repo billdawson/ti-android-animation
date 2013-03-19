@@ -14,7 +14,7 @@
 			<fileset dir="${dist}" includes="*.zip"/>
 		</copy>
 		<exec dir="${anvil.driver}" executable="node">
-			<arg line="driver.js --sdk-version=${anvil.testSdkVersion} --command='start --config-set=animation'"/>
+			<arg line="driver.js --platform=android --sdk-version=${anvil.testSdkVersion} --command='start --config-set=animation'"/>
 		</exec>
 	</target>
 </project>

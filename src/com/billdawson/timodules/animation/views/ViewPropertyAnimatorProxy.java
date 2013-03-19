@@ -87,6 +87,10 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	public ViewPropertyAnimatorProxy(TiViewProxy view) {
 		super();
 
+		if (view == null) {
+			throw new IllegalStateException(ERR_VIEW_UNAVAILABLE);
+		}
+
 		TiUIView tiView = view.peekView();
 		if (tiView == null) {
 			throw new IllegalStateException(ERR_VIEW_UNAVAILABLE);
