@@ -16,6 +16,29 @@ can run multiple `ObjectAnimator` instances either simultaneously or back-to-bac
 The real star of the bunch is the `ViewPropertyAnimator`, which is the one
 you should be trying to use first.
 
+Documentation
+=============
+
+Currently [the documentation][9] is in javadoc strings within the code and generated
+using Doxygen. The result is not particularly "Javascripty", but I hate
+separating documentation from code, so that's the way it is at least
+for now.
+
+Usage
+=====
+
+Please see [the documentation][9] for instructions on how to use the module in
+your Titanium app. You can also find code samples under the example/ folder.
+
+Meanwhile here is a very quick example of using the view property animator made
+available via this module:
+
+    var animationModule = require("com.billdawson.timodules.animation");
+	
+	//... setup window / views ...
+    
+    animationModule.viewPropertyAnimator.animate(myView).xBy(50).yBy(50);
+
 Build
 =====
 
@@ -32,21 +55,6 @@ Titanium app projects be provided here. Look elsewhere!
 
 If you don't wish to build but just want the packaged module, you should be able
 to find recent ZIPs of it at ... (TODO).
-
-Usage
-=====
-
-Please see documentation for instructions on how to use the module in
-your Titanium app. You can also find code samples under the example/ folder.
-
-Meanwhile here is a very quick example of using the view property animator made
-available via this module:
-
-    var animationModule = require("com.billdawson.timodules.animation");
-	
-	//... setup window / views ...
-    
-    animationModule.viewPropertyAnimator.animate(myView).xBy(50).yBy(50);
 
 Developed By
 ============
@@ -88,3 +96,4 @@ License
 [6]: http://developer.android.com/reference/android/view/ViewPropertyAnimator.html
 [7]: https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/AnimatorSet_.java
 [8]: http://developer.android.com/reference/android/animation/AnimatorSet.html
+[9]: http://billdawson.github.com/ti-android-animation/docs/index.html
