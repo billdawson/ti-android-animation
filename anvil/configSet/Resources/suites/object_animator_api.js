@@ -88,7 +88,7 @@ module.exports = new function() {
 		valueOf(testRun, objAnim.getInterpolator()).shouldBe(animMod.LINEAR_INTERPOLATOR);
 
 		// interpolatorValues
-		valueOf(testRun, function(){objAnim.setInterpolatorValues([1, 2]);}).shouldNotThrowException();
+		valueOf(testRun, function(){objAnim.setInterpolatorValues(1, 2);}).shouldNotThrowException();
 		valueOf(testRun, function(){objAnim.getInterpolatorValues();}).shouldNotThrowException();
 		values = objAnim.getInterpolatorValues();
 		valueOf(testRun, values.length).shouldBe(2);
@@ -188,7 +188,7 @@ module.exports = new function() {
 		valueOf(testRun, objAnim.getInterpolatorValues().length).shouldBe(2);
 		valueOf(testRun, objAnim.getInterpolatorValues()[0]).shouldBe(1);
 		valueOf(testRun, objAnim.getInterpolatorValues()[1]).shouldBe(2);
-		objAnim.setInterpolatorValues([3,4]);
+		objAnim.setInterpolatorValues(3, 4);
 		valueOf(testRun, objAnim.interpolatorValues).shouldBeArray();
 		valueOf(testRun, objAnim.interpolatorValues.length).shouldBe(2);
 		valueOf(testRun, objAnim.interpolatorValues[0]).shouldBe(3);

@@ -185,19 +185,13 @@ public abstract class Animator_ extends KrollProxy implements AnimatorListener {
 	/**
 	 * Sets the interpolator values.
 	 */
-	public void setInterpolatorValues(Object values) {
+	public void setInterpolatorValues(Object... values) {
 		if (values == null) {
 			mInterpolatorValues = null;
 			return;
 		}
 
-		if (!values.getClass().isArray()) {
-			values = new Object[] { values };
-		}
-
-		Object[] arrayValues = (Object[]) values;
-
-		mInterpolatorValues = AnimationUtils.unboxFloatValues(arrayValues);
+		mInterpolatorValues = AnimationUtils.unboxFloatValues(values);
 	}
 
 	/**

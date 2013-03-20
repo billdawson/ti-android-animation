@@ -32,7 +32,8 @@ package com.billdawson.timodules.animation;
  * It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation
  * API: [ObjectAnimator](@ref ObjectAnimator_) ([native][7]) and [ViewPropertyAnimator](@ref ViewPropertyAnimator_)
  * ([native][8]).
- * Additionally it provides access to the [AnimatorSet](@ref AnimatorSet_) ([native][9]), which can run multiple
+ * 
+ * Additionally, it provides access to the [AnimatorSet](@ref AnimatorSet_) ([native][9]), which can run multiple
  * `ObjectAnimator` instances either simultaneously or back-to-back.
  * 
  * The real star of the bunch is the [ViewPropertyAnimator](@ref ViewPropertyAnimator_), which is the one
@@ -226,6 +227,7 @@ import android.view.View;
 import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.billdawson.timodules.animation.utils.AnimationUtils.Axis;
 import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactory;
+import com.billdawson.timodules.animation.views.ViewPropertyAnimator_;
 import com.nineoldandroids.animation.ValueAnimator;
 
 /**
@@ -250,90 +252,210 @@ public class AndroidAnimation extends KrollModule {
 	public static final int NO_INT_VALUE = Integer.MIN_VALUE;
 
 	/**
+	 * Constant for use when specifying that animation should use the Android
+	 * `IntEvaluator`.
+	 * 
+	 * You generally won't need to use this directly, because if you create an
+	 * `ObjectAnimator` to animate integer values, it will automatically use
+	 * this type of evaluator.
+	 * 
+	 * For more information about evaluators, see
+	 * [the Android documenation](http://developer.android.com/reference/android/animation/TypeEvaluator.html).
+	 * 
+	 * @see ObjectAnimator_#setEvaluator(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int INT_EVALUATOR = 1;
 
 	/**
+	 * Constant for use when specifying that animation should use the Android
+	 * `FloatEvaluator`.
+	 * 
+	 * You generally won't need to use this directly, because if you create an
+	 * `ObjectAnimator` to animate float values, it will automatically use
+	 * this type of evaluator.
+	 * 
+	 * For more information about evaluators, see
+	 * [the Android documenation](http://developer.android.com/reference/android/animation/TypeEvaluator.html).
+	 * 
+	 * @see ObjectAnimator_#setEvaluator(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int FLOAT_EVALUATOR = 2;
 
 	/**
+	 * Constant for use when specifying that animation should use the Android
+	 * `ArgbEvaluator`.
+	 * 
+	 * You will want to use this evaluator if you are animating view color
+	 * properties, such as `backgroundColor`.
+	 * 
+	 * For more information about evaluators, see
+	 * [the Android documenation](http://developer.android.com/reference/android/animation/TypeEvaluator.html).
+	 * 
+	 * @see ObjectAnimator_#setEvaluator(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int ARGB_EVALUATOR = 3;
 
 	/**
+	 * Constant indicating that the animation should repeat forever.
+	 * 
+	 * You can read about `INFINITE`, `RESTART` and `REVERSE` in the
+	 * [Android documentation](http://developer.android.com/reference/android/animation/ValueAnimator.html#constants).
+	 * @see ObjectAnimator_#setRepeatCount(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int INFINITE = ValueAnimator.INFINITE;
 
 	/**
+	 * Constant indicating that when "repeating", the animation should start over from the
+	 * beginning.
+	 * 
+	 * You can read about `INFINITE`, `RESTART` and `REVERSE` in the
+	 * [Android documentation](http://developer.android.com/reference/android/animation/ValueAnimator.html#constants).
+	 * @see ObjectAnimator_#setRepeatMode(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int RESTART = ValueAnimator.RESTART;
 
 	/**
+	 * Constant indicating that when "repeating", the animation should reverse itself.
+	 * 
+	 * You can read about `INFINITE`, `RESTART` and `REVERSE` in the
+	 * [Android documentation](http://developer.android.com/reference/android/animation/ValueAnimator.html#constants).
+	 * @see ObjectAnimator_#setRepeatMode(int)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int REVERSE = ValueAnimator.REVERSE;
 
 	/**
+	 * Constant for the accelerate interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int ACCELERATE_INTERPOLATOR = 1;
 
 	/**
+	 * Constant for the decelerate interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int DECELERATE_INTERPOLATOR = 2;
 
 	/**
+	 * Constant for the accelerate decelerate interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int ACCELERATE_DECELERATE_INTERPOLATOR = 3;
 
 	/**
+	 * Constant for the anticipate interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int ANTICIPATE_INTERPOLATOR = 4;
 
 	/**
+	 * Constant for the anticipate overshoot interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int ANTICIPATE_OVERSHOOT_INTERPOLATOR = 5;
 
 	/**
+	 * Constant for the bounce interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int BOUNCE_INTERPOLATOR = 6;
 
 	/**
+	 * Constant for the cycle interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int CYCLE_INTERPOLATOR = 7;
 
 	/**
+	 * Constant for the overshoot interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
 	public static final int OVERSHOOT_INTERPOLATOR = 8;
 
 	/**
+	 * Constant for the linear interpolator.
+	 * 
+	 * Read about different animation interpolators in the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * 
+	 * @see ObjectAnimator_#setInterpolator(int)
+	 * @see AnimatorSet_#setInterpolator(int)
+	 * @see ViewPropertyAnimator_#setInterpolator(int, Object...)
 	 * @since 1.0
 	 */
 	@Kroll.constant
@@ -344,9 +466,11 @@ public class AndroidAnimation extends KrollModule {
 	}
 
 	/**
-	 * Returns a factory for the [Object
-	 * @return
-	 * @since 1.0
+	 * Returns a factory for the [ObjectAnimator](@ref ObjectAnimator_),
+	 * from which you can call `ofInt` or `ofFloat` to
+	 * instantiate an `ObjectAnimator`.
+	 * @return	[Factory object](@ref ObjectAnimatorFactory) with which to instantiate an `ObjectAnimator`. 
+	 * @since 	1.0
 	 */
 	@Kroll.method
 	@Kroll.getProperty
@@ -355,9 +479,12 @@ public class AndroidAnimation extends KrollModule {
 	}
 
 	/**
+	 * Returns a factory for the [ViewPropertyAnimator](@ref ViewPropertyAnimator_),
+	 * from which you can call `animate` to
+	 * instantiate a `ViewPropertyAnimator`.
 	 * 
-	 * @return
-	 * @since 1.0
+	 * @return	[Factory object](@ref ViewPropertyAnimatorFactory) with which to instantiate a `ViewPropertyAnimator`. 
+	 * @since	1.0
 	 */
 	@Kroll.method
 	@Kroll.getProperty
@@ -366,8 +493,22 @@ public class AndroidAnimation extends KrollModule {
 	}
 
 	/**
+	 * Converts dips, sips, etc. into pixels, taking density into account.
+	 * Useful when animating using the [ObjectAnimator](@ref ObjectAnimator_],
+	 * which does *not* perform such calculations automatically for you.
+	 * (The [ViewPropertyAnimator](@ref ViewPropertyAnimator_), however,
+	 * will do these calculations for you, so when using it you will likely
+	 * not need to be using this function.)
 	 * 
-	 * @since 1.0
+	 * @param view			The view you will eventually be animating, or any view on
+	 * 						the same window. This is needed to determine the density
+	 * 						of the hosting screen.
+	 * @param originalValue A number with a unit specifier, such as "12dp" if you wished
+	 * 						to convert 12dp to pixels.
+	 * @param direction		(Optional) "horizontal" (default) or "vertical". Only relevant
+	 * 						if converting from inches, centimeters or millimeters.
+	 * @return 				Number of pixels
+	 * @since				1.0
 	 */
 	@Kroll.method
 	public float toPixels(TiViewProxy view, Object originalValue,

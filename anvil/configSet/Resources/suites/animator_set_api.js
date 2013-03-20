@@ -42,7 +42,7 @@ module.exports = new function() {
 		valueOf(testRun, animSet.getInterpolator()).shouldBe(animMod.LINEAR_INTERPOLATOR);
 
 		// interpolatorValues
-		valueOf(testRun, function(){animSet.setInterpolatorValues([1, 2]);}).shouldNotThrowException();
+		valueOf(testRun, function(){animSet.setInterpolatorValues(1, 2);}).shouldNotThrowException();
 		valueOf(testRun, function(){animSet.getInterpolatorValues();}).shouldNotThrowException();
 		values = animSet.getInterpolatorValues();
 		valueOf(testRun, values.length).shouldBe(2);
@@ -173,7 +173,7 @@ module.exports = new function() {
 		valueOf(testRun, animSet.getInterpolatorValues().length).shouldBe(2);
 		valueOf(testRun, animSet.getInterpolatorValues()[0]).shouldBe(1);
 		valueOf(testRun, animSet.getInterpolatorValues()[1]).shouldBe(2);
-		animSet.setInterpolatorValues([3,4]);
+		animSet.setInterpolatorValues(3, 4);
 		valueOf(testRun, animSet.interpolatorValues).shouldBeArray();
 		valueOf(testRun, animSet.interpolatorValues.length).shouldBe(2);
 		valueOf(testRun, animSet.interpolatorValues[0]).shouldBe(3);

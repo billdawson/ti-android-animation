@@ -152,7 +152,7 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setInterpolator(int interpolator,
-			Object[] interpolatorValues) {
+			Object... interpolatorValues) {
 
 		float[] floatValues = AnimationUtils
 				.unboxFloatValues(interpolatorValues);
