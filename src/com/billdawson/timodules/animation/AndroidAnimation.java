@@ -30,8 +30,9 @@ package com.billdawson.timodules.animation;
  * The module doesn't follow the Android API _exactly_, but fairly closely.
  * 
  * It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation
- * API: [ObjectAnimator](@ref ObjectAnimator_) and [ViewPropertyAnimator](@ref ViewPropertyAnimator_).
- * Additionally it provides access to the [AnimatorSet](@ref AnimatorSet_), which can run multiple
+ * API: [ObjectAnimator](@ref ObjectAnimator_) ([native][7]) and [ViewPropertyAnimator](@ref ViewPropertyAnimator_)
+ * ([native][8]).
+ * Additionally it provides access to the [AnimatorSet](@ref AnimatorSet_) ([native][9]), which can run multiple
  * `ObjectAnimator` instances either simultaneously or back-to-back.
  * 
  * The real star of the bunch is the [ViewPropertyAnimator](@ref ViewPropertyAnimator_), which is the one
@@ -205,10 +206,13 @@ package com.billdawson.timodules.animation;
  *
  * [1]: http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html
  * [2]: http://nineoldandroids.com
- * [3]: TODO/githubsource
+ * [3]: https://github.com/billdawson/ti-android-animation
  * [4]: http://github.com/billdawson
- * [5]: TODO/exampleprojongithub
+ * [5]: https://github.com/billdawson/ti-android-animation/tree/master/example
  * [6]: http://developer.android.com/reference/android/view/ViewPropertyAnimator.html
+ * [7]: http://developer.android.com/reference/android/animation/ObjectAnimator.html
+ * [8]: http://developer.android.com/reference/android/view/ViewPropertyAnimator.html
+ * [9]: http://developer.android.com/reference/android/animation/AnimatorSet.html
  */
 
 import org.appcelerator.kroll.KrollModule;

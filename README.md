@@ -82,3 +82,9 @@ License
 
 [1]: http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html
 [2]: http://nineoldandroids.com
+[3]: https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/ObjectAnimator_.java
+[4]: http://developer.android.com/reference/android/animation/ObjectAnimator.html
+[5]: https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/views/ViewPropertyAnimator_.java
+[6]: http://developer.android.com/reference/android/view/ViewPropertyAnimator.html
+[7]: https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/AnimatorSet_.java
+[8]: http://developer.android.com/reference/android/animation/AnimatorSet.html
