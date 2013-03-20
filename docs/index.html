@@ -80,8 +80,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock"><h2>Description</h2>
 <p>This Titanium Android module makes the <a href="http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html">Honeycomb (Android 3.0) animation API</a> available to Titanium Android apps. It uses Jake Wharton's excellent <a href="http://nineoldandroids.com">NineOldAndroids</a> library to make the animations available on pre-Honeycomb devices as well.</p>
 <p>The module doesn't follow the Android API <em>exactly</em>, but fairly closely.</p>
-<p>It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation API: <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> (<a href="http://developer.android.com/reference/android/animation/ObjectAnimator.html">native</a>) and ViewPropertyAnimator (<a href="http://developer.android.com/reference/android/view/ViewPropertyAnimator.html">native</a>). Additionally it provides access to the <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator_set__.html">AnimatorSet</a> (<a href="http://developer.android.com/reference/android/animation/AnimatorSet.html">native</a>), which can run multiple <code>ObjectAnimator</code> instances either simultaneously or back-to-back.</p>
-<p>The real star of the bunch is the ViewPropertyAnimator, which is the one you should be trying to use first.</p>
+<p>It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation API: <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> (<a href="http://developer.android.com/reference/android/animation/ObjectAnimator.html">native</a>) and <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1views_1_1_view_property_animator__.html">ViewPropertyAnimator</a> (<a href="http://developer.android.com/reference/android/view/ViewPropertyAnimator.html">native</a>).</p>
+<p>Additionally, it provides access to the <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator_set__.html">AnimatorSet</a> (<a href="http://developer.android.com/reference/android/animation/AnimatorSet.html">native</a>), which can run multiple <code>ObjectAnimator</code> instances either simultaneously or back-to-back.</p>
+<p>The real star of the bunch is the <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1views_1_1_view_property_animator__.html">ViewPropertyAnimator</a>, which is the one you should be trying to use first.</p>
 <h2>Accessing the Module in Your App Code</h2>
 <h3>Get the module's ZIP file</h3>
 <p>You can either build the module from <a href="https://github.com/billdawson/ti-android-animation">source</a> (this assumes you know how to build Titanium modules; no instructions are provided here for that) or get a recent <a href="http://github.com/billdawson/ti-android-animation/tree/gh-pages/packaged">packaged ZIP from Github</a>.</p>
@@ -190,7 +191,7 @@ limitations under the License.
 </pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 20 2013 20:33:33 for Android Animation for Titanium by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 20 2013 23:23:28 for Android Animation for Titanium by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
