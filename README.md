@@ -1,6 +1,12 @@
 Android Animation for Titanium
 ================================
 
+Quick links:
+
+- [Project's Github Page](http://billdawson.github.com/ti-android-animation)
+- [Documentation](http://billdawson.github.com/ti-android-animation/docs)
+- [Built and Packaged (ZIP)](http://github.com/billdawson/ti-android-animation/tree/gh-pages/packaged)
+
 This Titanium Android module makes the [Honeycomb (Android 3.0) animation API][1]
 available to Titanium Android apps. It uses Jake Wharton's excellent
 [NineOldAndroids][2] library to make the animations available on pre-Honeycomb
