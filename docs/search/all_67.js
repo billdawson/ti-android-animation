@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['getchildanimations',['getChildAnimations',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator_set__.html#ac51b969875e05595a3a034b90c684f66',1,'com::billdawson::timodules::animation::AnimatorSet_']]],
+  ['getduration',['getDuration',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator__.html#af62846500d664f249949ed706ba8a2ef',1,'com.billdawson.timodules.animation.Animator_.getDuration()'],['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1views_1_1_view_property_animator__.html#ad4862eb069a36b026fba1c123ce7a1f7',1,'com.billdawson.timodules.animation.views.ViewPropertyAnimator_.getDuration()']]],
+  ['getevaluator',['getEvaluator',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html#a1c031987be1f77f5b2afa907bfc75f9f',1,'com::billdawson::timodules::animation::ObjectAnimator_']]],
+  ['getinterpolator',['getInterpolator',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator__.html#adcbccc86a097f5d12aa1bb8bcf5b5872',1,'com::billdawson::timodules::animation::Animator_']]],
+  ['getinterpolatorvalues',['getInterpolatorValues',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator__.html#a552488cfd85f9547bd4b2ff083697418',1,'com::billdawson::timodules::animation::Animator_']]],
+  ['getobjectanimator',['getObjectAnimator',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_android_animation.html#a6d83fe1a2f45ec47b08a3756035edb62',1,'com::billdawson::timodules::animation::AndroidAnimation']]],
+  ['getpropertyname',['getPropertyName',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html#aad941ae5ec36f286691dbdea5059662e',1,'com::billdawson::timodules::animation::ObjectAnimator_']]],
+  ['getrepeatcount',['getRepeatCount',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html#a0a3666be761791a9ae5996a732df3659',1,'com::billdawson::timodules::animation::ObjectAnimator_']]],
+  ['getrepeatmode',['getRepeatMode',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html#a9836cc0e9e844f5fbe7896c0c0dd976c',1,'com::billdawson::timodules::animation::ObjectAnimator_']]],
+  ['getstartdelay',['getStartDelay',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator__.html#a8f8c729235f3993aebc91ce23d940745',1,'com.billdawson.timodules.animation.Animator_.getStartDelay()'],['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1views_1_1_view_property_animator__.html#a80e94291eb337ef9c988616ec113c13d',1,'com.billdawson.timodules.animation.views.ViewPropertyAnimator_.getStartDelay()']]],
+  ['gettarget',['getTarget',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_animator__.html#a67a37c2d18b40443523d32933c064862',1,'com::billdawson::timodules::animation::Animator_']]],
+  ['getviewpropertyanimator',['getViewPropertyAnimator',['../classcom_1_1billdawson_1_1timodules_1_1animation_1_1_android_animation.html#a4d389813c67ab144e79829556f4bb996',1,'com::billdawson::timodules::animation::AndroidAnimation']]]
+];
