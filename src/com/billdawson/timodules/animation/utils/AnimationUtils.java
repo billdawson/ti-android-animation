@@ -118,63 +118,63 @@ public class AnimationUtils {
 				: interpolatorValues.length;
 
 		switch (interpolatorType) {
-		case AndroidAnimation.ACCELERATE_DECELERATE_INTERPOLATOR:
-			return new AccelerateDecelerateInterpolator();
+			case AndroidAnimation.ACCELERATE_DECELERATE_INTERPOLATOR:
+				return new AccelerateDecelerateInterpolator();
 
-		case AndroidAnimation.ACCELERATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new AccelerateInterpolator(interpolatorValues[0]);
-			} else {
-				return new AccelerateInterpolator();
-			}
+			case AndroidAnimation.ACCELERATE_INTERPOLATOR:
+				if (valueCount > 0) {
+					return new AccelerateInterpolator(interpolatorValues[0]);
+				} else {
+					return new AccelerateInterpolator();
+				}
 
-		case AndroidAnimation.ANTICIPATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new AnticipateInterpolator(interpolatorValues[0]);
-			} else {
-				return new AnticipateInterpolator();
-			}
+			case AndroidAnimation.ANTICIPATE_INTERPOLATOR:
+				if (valueCount > 0) {
+					return new AnticipateInterpolator(interpolatorValues[0]);
+				} else {
+					return new AnticipateInterpolator();
+				}
 
-		case AndroidAnimation.ANTICIPATE_OVERSHOOT_INTERPOLATOR:
-			if (valueCount == 0) {
-				return new AnticipateOvershootInterpolator();
-			} else if (valueCount == 1) {
-				return new AnticipateOvershootInterpolator(
-						interpolatorValues[0]);
-			} else {
-				return new AnticipateOvershootInterpolator(
-						interpolatorValues[0], interpolatorValues[1]);
-			}
+			case AndroidAnimation.ANTICIPATE_OVERSHOOT_INTERPOLATOR:
+				if (valueCount == 0) {
+					return new AnticipateOvershootInterpolator();
+				} else if (valueCount == 1) {
+					return new AnticipateOvershootInterpolator(
+							interpolatorValues[0]);
+				} else {
+					return new AnticipateOvershootInterpolator(
+							interpolatorValues[0], interpolatorValues[1]);
+				}
 
-		case AndroidAnimation.BOUNCE_INTERPOLATOR:
-			return new BounceInterpolator();
+			case AndroidAnimation.BOUNCE_INTERPOLATOR:
+				return new BounceInterpolator();
 
-		case AndroidAnimation.CYCLE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new CycleInterpolator(interpolatorValues[0]);
-			} else {
-				Log.w(TAG,
-						"No values provided for Cycle Interpolator. Defaulting to 0.");
-				return new CycleInterpolator(0f);
-			}
+			case AndroidAnimation.CYCLE_INTERPOLATOR:
+				if (valueCount > 0) {
+					return new CycleInterpolator(interpolatorValues[0]);
+				} else {
+					Log.w(TAG,
+							"No values provided for Cycle Interpolator. Defaulting to 0.");
+					return new CycleInterpolator(0f);
+				}
 
-		case AndroidAnimation.DECELERATE_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new DecelerateInterpolator(interpolatorValues[0]);
-			} else {
-				return new DecelerateInterpolator();
-			}
+			case AndroidAnimation.DECELERATE_INTERPOLATOR:
+				if (valueCount > 0) {
+					return new DecelerateInterpolator(interpolatorValues[0]);
+				} else {
+					return new DecelerateInterpolator();
+				}
 
-		case AndroidAnimation.OVERSHOOT_INTERPOLATOR:
-			if (valueCount > 0) {
-				return new OvershootInterpolator(interpolatorValues[0]);
-			} else {
-				return new OvershootInterpolator();
-			}
+			case AndroidAnimation.OVERSHOOT_INTERPOLATOR:
+				if (valueCount > 0) {
+					return new OvershootInterpolator(interpolatorValues[0]);
+				} else {
+					return new OvershootInterpolator();
+				}
 
-		default:
-			Log.w(TAG, "Unknown interpolator: " + interpolatorType);
-			return null;
+			default:
+				Log.w(TAG, "Unknown interpolator: " + interpolatorType);
+				return null;
 		}
 	}
 
@@ -200,21 +200,21 @@ public class AnimationUtils {
 		float axisDpi = axis == Axis.X ? metrics.xdpi : metrics.ydpi;
 
 		switch (tiUnitSpecifier) {
-		case TypedValue.COMPLEX_UNIT_PX:
-		case TiDimension.COMPLEX_UNIT_UNDEFINED:
-			return tiValue;
-		case TypedValue.COMPLEX_UNIT_DIP:
-			return metrics.density * tiValue;
-		case TypedValue.COMPLEX_UNIT_SP:
-			return metrics.scaledDensity * tiValue;
-		case TypedValue.COMPLEX_UNIT_PT:
-			return tiValue * (axisDpi / POINT_DPI);
-		case TypedValue.COMPLEX_UNIT_MM:
-			return (tiValue / MM_INCH) * axisDpi;
-		case TiDimension.COMPLEX_UNIT_CM:
-			return (tiValue / CM_INCH) * axisDpi;
-		case TypedValue.COMPLEX_UNIT_IN:
-			return tiValue * axisDpi;
+			case TypedValue.COMPLEX_UNIT_PX:
+			case TiDimension.COMPLEX_UNIT_UNDEFINED:
+				return tiValue;
+			case TypedValue.COMPLEX_UNIT_DIP:
+				return metrics.density * tiValue;
+			case TypedValue.COMPLEX_UNIT_SP:
+				return metrics.scaledDensity * tiValue;
+			case TypedValue.COMPLEX_UNIT_PT:
+				return tiValue * (axisDpi / POINT_DPI);
+			case TypedValue.COMPLEX_UNIT_MM:
+				return (tiValue / MM_INCH) * axisDpi;
+			case TiDimension.COMPLEX_UNIT_CM:
+				return (tiValue / CM_INCH) * axisDpi;
+			case TypedValue.COMPLEX_UNIT_IN:
+				return tiValue * axisDpi;
 		}
 
 		Log.w(TAG,

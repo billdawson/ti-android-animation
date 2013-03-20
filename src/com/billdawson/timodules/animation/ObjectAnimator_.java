@@ -23,6 +23,7 @@ import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.util.TiConvert;
 import org.appcelerator.titanium.view.TiUIView;
 
+import android.graphics.Color;
 import android.view.View;
 
 import com.billdawson.timodules.animation.utils.AnimationUtils;
@@ -37,7 +38,8 @@ enum PropertyDataType {
 }
 
 /**
- * Use this to animate View properties when faced with any of these circumstances:
+ * Use this to animate *native* View properties when faced with any of these circumstances:
+ * 
  * - The View property which you wish to animate cannot be animated via the
  *   [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_). A very common
  *   example of such a property would be `backgroundColor`.
@@ -48,6 +50,31 @@ enum PropertyDataType {
  * - You wish to include one or more animations together in an
  *   [AnimatorSet](@ref AnimatorSet). The `AnimatorSet` does not
  *   accept `ViewPropertyAnimator` instances; you must give it instances of this class.
+ *   
+ * Your first choice should always be the [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_)
+ * because it is slightly more performant (according to Android), has a simpler interface and
+ * will accept values that specify units (such as "12dp"). But if any of the
+ * conditions listed above applies, then turn to this class, the `ObjectAnimator`.
+ *   
+ * In actual fact, `ObjectAnimator` can be used to animate the properties of any kind
+ * of object -- not just Views -- as long as the property has *Java* setter and getter methods.  In
+ * Javascript, however, you only have access to the objects you create from scratch
+ * (i.e., true Javascript objects) and Titanium-based objects such as views, which
+ * (under the covers) have counterparts in Java. Many properties of Titanium objects, however,
+ * do not have true getter and setter methods in their Java counterparts, so
+ * they can't be animated directly using the `ObjectAnimator`.
+ * 
+ * Therefore, when you use `ObjectAnimator` to animate a Titanium view
+ * (`View`, `ImageView`, `Label`, `TableView`, etc.), we "unwrap" the view
+ * to get to the real [Android View][1] and animate *that* instead. And the
+ * Java class for Android View has getter and setter methods for its
+ * properties, so `ObjectAnimator` works just fine with it.
+ * 
+ * This also means that the property name that you pass as the second
+ * argument to [ofInt](@ref ObjectAnimatorFactory#ofInt) and
+ * [ofFloat](@ref ObjectAnimatorFactory#ofFloat) must be the *Android*
+ * property name, so being familiar with the getter and setter methods
+ * of [Android View][1] would be helpful.
  * 
  * The preferred way to instantiate this class is via one of the two factory
  * methods available in the module.
@@ -60,8 +87,37 @@ enum PropertyDataType {
  *     var animator = module.objectAnimator.ofFloat(view, "propertyName", fromVal,
  *         toVal);
  * 
- * As you might guess, you'll use [ofInt](@ref ObjectAnimatorFactory#ofInt) when...
+ * As you might guess, you'll use [ofInt](@ref ObjectAnimatorFactory#ofInt) when the
+ * property you want to animate has an integer data type, while
+ * [ofFloat](@ref ObjectAnimatorFactory#ofFloat) should be used when animating
+ * a property that has a float datatype.
  * 
+ * Since you are animating *native* Android properties, be aware that most integer
+ * values (and some float values) represent *pixels*.  In this `ObjectAnimator`
+ * class we **do not do pixel/density calculations automatically for you**, which
+ * means you cannot animate with values such as "20dp". But this module does
+ * contain a [toPixels](@ref AndroidAnimation#toPixels) method to help
+ * you make those calculations before you pass the values to an `ObjectAnimator`.
+ * 
+ * Here is an example of using `ObjectAnimator` to animate a view's `backgroundColor`
+ * from red to green:
+ * 
+ *     var win = Ti.UI.createWindow(),
+ *         view = Ti.UI.createView({
+ *             backgroundColor: "green"
+ *         }),
+ *         animMod = require("com.billdawson.timodules.animation"),
+ *         animator = animMod.objectAnimator.ofInt(view, "backgroundColor",
+ *             "red");
+ *     
+ *     animator.setDuration(1000);
+ *     animator.setEvaluator(animMod.ARGB_EVALUATOR);
+ *     win.add(view);
+ *     win.addEventListener("open", function() {
+ *         animator.start();
+ *     });
+ * 
+ * [1]: http://developer.android.com/reference/android/view/View.html
  * @since 1.0
  * 
  */
@@ -239,14 +295,30 @@ public class ObjectAnimator_ extends Animator_ {
 	@Kroll.method
 	@Kroll.setProperty
 	/**
-	 * If you are animating a property that takes integer values,
-	 * use this setter method to animate between one or more values.
-	 * If you pass just one value, then the animation will be from
+	 * If you are animating a property whose data type is `int`,
+	 * you may use this setter method to animate between one or more values.
+	 * However, it's preferred that you use the [ofInt](@ref ObjectAnimatorFactory#ofInt)
+	 * method to create the `ObjectAnimator` and set its `int` values
+	 * all at once.
+	 * 
+	 * If you pass just one value here, then the animation will be from
 	 * the _current_ value to the value you give here. If you pass
 	 * more than one value, then the animation will start from the
 	 * first value you provide and end with the last value you provide.
 	 * The two typical use cases are to provide either one value or
-	 * two values.
+	 * two values.  However it is possible to pass more than two values,
+	 * in which case the animation will "go through" the intermediary
+	 * values on its way to the final value.
+	 * 
+	 * If you are animating the view's backgroundColor, you can
+	 * pass strings representing colors instead of integers.
+	 * For example, "black", "#000", and such would be
+	 * recognized and changed on the fly for you to their valid Android
+	 * color integers.  Besides this special case, only pass
+	 * integer values. We do **not** do pixel calculations for you,
+	 * so if you are animating a pixel value be sure to use
+	 * [toPixels](@ref AndroidAnimation#toPixels) first to get
+	 * the correct pixel value.
 	 * 
 	 * @since 1.0
 	 */
@@ -269,7 +341,38 @@ public class ObjectAnimator_ extends Animator_ {
 			} else if (member instanceof String) {
 				try {
 					int colorVal = TiConvert.toColor((String) member);
-					mIntValues[i] = colorVal;
+					// HACK For whatever reason Titanium's toColor will
+					// default to "yellow" (pre 3.1.0) or "transparent"
+					// (3.1.0+) if it can't figure out the passed
+					// value. Therefore if the returned value is either
+					// yellow or transparent, only use it if we already
+					// know we're animating the backgroundColor property.
+					// Else throw.
+					if (colorVal != Color.TRANSPARENT
+							&& colorVal != Color.YELLOW) {
+						mIntValues[i] = colorVal;
+					} else {
+						String value = (String) member;
+						if (!value.startsWith("#")
+								&& value.toLowerCase() != "yellow"
+								&& value.toLowerCase() != "transparent") {
+							// Doesn't look right, since it appears that a color
+							// value matching transparent or yellow wasn't
+							// really
+							// passed in. So only use this value if in fact we
+							// know we are animating backgroundColor. Otherwise
+							// this
+							// looks too fishy and so we'll throw.
+							if (mPropertyName != null
+									&& mPropertyName.equals("backgroundColor")) {
+								mIntValues[i] = colorVal;
+							} else {
+								throw new IllegalArgumentException(
+										ERR_INT_VALUE);
+							}
+						}
+					}
+
 				} catch (IllegalArgumentException e) {
 					throw new IllegalArgumentException(ERR_INT_VALUE);
 				}
@@ -280,6 +383,21 @@ public class ObjectAnimator_ extends Animator_ {
 	}
 
 	/**
+	 * If you are animating a property whose data type is `float`,
+	 * you may use this setter method to animate between one or more values.
+	 * However, it's preferred that you use the [ofFloat](@ref ObjectAnimatorFactory#ofFloat)
+	 * method to create the `ObjectAnimator` and set its `float` values
+	 * all at once.
+	 * 
+	 * If you pass just one value here, then the animation will be from
+	 * the _current_ value to the value you give here. If you pass
+	 * more than one value, then the animation will start from the
+	 * first value you provide and end with the last value you provide.
+	 * The two typical use cases are to provide either one value or
+	 * two values.  However it is possible to pass more than two values,
+	 * in which case the animation will "go through" the intermediary
+	 * values on its way to the final value.
+	 * 
 	 * @since 1.0
 	 */
 	@Kroll.method

@@ -205,7 +205,13 @@ package com.billdawson.timodules.animation;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.titanium.proxy.TiViewProxy;
+import org.appcelerator.titanium.view.TiUIView;
 
+import android.view.View;
+
+import com.billdawson.timodules.animation.utils.AnimationUtils;
+import com.billdawson.timodules.animation.utils.AnimationUtils.Axis;
 import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactory;
 import com.nineoldandroids.animation.ValueAnimator;
 
@@ -344,6 +350,36 @@ public class AndroidAnimation extends KrollModule {
 	@Kroll.getProperty
 	public ViewPropertyAnimatorFactory getViewPropertyAnimator() {
 		return mViewPropertyAnimatorFactory;
+	}
+
+	/**
+	 * 
+	 * @since 1.0
+	 */
+	@Kroll.method
+	public float toPixels(TiViewProxy view, Object originalValue,
+			@Kroll.argument(optional = true) String direction) {
+		Axis axis = Axis.X;
+		if (direction != null && direction.toLowerCase() == "vertical") {
+			axis = Axis.Y;
+		}
+
+		TiUIView tiView = view.peekView();
+		if (tiView == null) {
+			throw new IllegalStateException(
+					"The view must be rendered before toPixels() can be called because the density of its host screen must be determined.");
+		}
+
+		View nativeView = tiView.getNativeView();
+		if (nativeView == null) {
+			throw new IllegalStateException(
+					"The view must be rendered before toPixels() can be called because the density of its host screen must be determined.");
+		}
+
+		return AnimationUtils.toPixels(
+				AnimationUtils.getDisplayMetrics(nativeView), originalValue,
+				axis);
+
 	}
 
 }

@@ -6,6 +6,7 @@ var win = Ti.UI.createWindow({
 	tests = [
 		{title: "Flip View", module: "flip"},
 		{title: "Cross fade", module: "crossfade"},
+		{title: "backgroundColor", module: "background"},
 	],
 	testList = Ti.UI.createTableView({minRowHeight:"48dp"}),
 	rows = [],
