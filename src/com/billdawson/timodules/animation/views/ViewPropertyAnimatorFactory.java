@@ -20,9 +20,10 @@ import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.proxy.TiViewProxy;
 
-@Kroll.proxy
-public class ViewPropertyAnimatorFactoryProxy extends KrollProxy {
-	public ViewPropertyAnimatorFactoryProxy() {
+@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidanimationModule.class,
+		name="ViewPropertyAnimatorFactory")
+public class ViewPropertyAnimatorFactory extends KrollProxy {
+	public ViewPropertyAnimatorFactory() {
 		super();
 	}
 

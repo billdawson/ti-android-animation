@@ -189,7 +189,7 @@ package com.billdawson.timodules.animation;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
-import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactoryProxy;
+import com.billdawson.timodules.animation.views.ViewPropertyAnimatorFactory;
 import com.nineoldandroids.animation.ValueAnimator;
 
 /**
@@ -206,7 +206,7 @@ public class AndroidanimationModule extends KrollModule {
 	private static final String TAG = "AndroidanimationModule";
 
 	private static final ObjectAnimatorFactory mObjectAnimatorFactory = new ObjectAnimatorFactory();
-	private static final ViewPropertyAnimatorFactoryProxy mViewPropertyAnimatorFactory = new ViewPropertyAnimatorFactoryProxy();
+	private static final ViewPropertyAnimatorFactory mViewPropertyAnimatorFactory = new ViewPropertyAnimatorFactory();
 
 	public static final long NO_LONG_VALUE = Long.MIN_VALUE;
 	public static final int NO_INT_VALUE = Integer.MIN_VALUE;
@@ -260,7 +260,7 @@ public class AndroidanimationModule extends KrollModule {
 
 	@Kroll.method
 	@Kroll.getProperty
-	public ViewPropertyAnimatorFactoryProxy getViewPropertyAnimator() {
+	public ViewPropertyAnimatorFactory getViewPropertyAnimator() {
 		return mViewPropertyAnimatorFactory;
 	}
 
