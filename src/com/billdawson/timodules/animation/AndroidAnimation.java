@@ -30,13 +30,13 @@ package com.billdawson.timodules.animation;
  * The module doesn't follow the Android API _exactly_, but fairly closely.
  * 
  * It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation
- * API: [ObjectAnimator](@ref ObjectAnimator_) ([native][7]) and [ViewPropertyAnimator](@ref ViewPropertyAnimator_)
+ * API: [ObjectAnimator](@ref ObjectAnimator_) ([native][7]) and [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_)
  * ([native][8]).
  * 
  * Additionally, it provides access to the [AnimatorSet](@ref AnimatorSet_) ([native][9]), which can run multiple
  * `ObjectAnimator` instances either simultaneously or back-to-back.
  * 
- * The real star of the bunch is the [ViewPropertyAnimator](@ref ViewPropertyAnimator_), which is the one
+ * The real star of the bunch is the [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_), which is the one
  * you should be trying to use first.
  *
  * Accessing the Module in Your App Code
@@ -469,6 +469,9 @@ public class AndroidAnimation extends KrollModule {
 	 * Returns a factory for the [ObjectAnimator](@ref ObjectAnimator_),
 	 * from which you can call `ofInt` or `ofFloat` to
 	 * instantiate an `ObjectAnimator`.
+	 * 
+	 * This is a property getter, so in Javascript you can access it directly as a property
+	 * (`module.objectAnimator`).
 	 * @return	[Factory object](@ref ObjectAnimatorFactory) with which to instantiate an `ObjectAnimator`. 
 	 * @since 	1.0
 	 */
@@ -479,11 +482,14 @@ public class AndroidAnimation extends KrollModule {
 	}
 
 	/**
-	 * Returns a factory for the [ViewPropertyAnimator](@ref ViewPropertyAnimator_),
+	 * Returns a factory for the [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_),
 	 * from which you can call `animate` to
 	 * instantiate a `ViewPropertyAnimator`.
 	 * 
-	 * @return	[Factory object](@ref ViewPropertyAnimatorFactory) with which to instantiate a `ViewPropertyAnimator`. 
+	 * This is a property getter, so in Javascript you can access it directly as a property
+	 * (`module.viewPropertyAnimator`).
+	 * 
+	 * @return	[Factory object](@ref views.ViewPropertyAnimatorFactory) with which to instantiate a `ViewPropertyAnimator`. 
 	 * @since	1.0
 	 */
 	@Kroll.method
@@ -496,7 +502,7 @@ public class AndroidAnimation extends KrollModule {
 	 * Converts dips, sips, etc. into pixels, taking density into account.
 	 * Useful when animating using the [ObjectAnimator](@ref ObjectAnimator_],
 	 * which does *not* perform such calculations automatically for you.
-	 * (The [ViewPropertyAnimator](@ref ViewPropertyAnimator_), however,
+	 * (The [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_), however,
 	 * will do these calculations for you, so when using it you will likely
 	 * not need to be using this function.)
 	 * 
