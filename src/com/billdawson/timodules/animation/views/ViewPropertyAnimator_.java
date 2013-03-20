@@ -39,8 +39,9 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
  * This class provides a fluent interface to quickly and easily
  * animate several properties of an Android View.
  */
-@Kroll.proxy
-public class ViewPropertyAnimatorProxy extends KrollProxy implements
+@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidanimationModule.class,
+		name="ViewPropertyAnimator")
+public class ViewPropertyAnimator_ extends KrollProxy implements
 		AnimatorListener {
 
 	private static final float NOVAL = Float.MIN_VALUE;
@@ -88,7 +89,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	private float translationYVal = NOVAL;
 	private float translationYByVal = NOVAL;
 
-	public ViewPropertyAnimatorProxy(TiViewProxy view) {
+	public ViewPropertyAnimator_(TiViewProxy view) {
 		super();
 
 		if (view == null) {
@@ -112,7 +113,7 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy setDuration(long milliseconds) {
+	public ViewPropertyAnimator_ setDuration(long milliseconds) {
 		mAnimator.setDuration(milliseconds);
 		return this;
 	}
@@ -128,13 +129,13 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy setStartDelay(long milliseconds) {
+	public ViewPropertyAnimator_ setStartDelay(long milliseconds) {
 		mAnimator.setStartDelay(milliseconds);
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy setInterpolator(int interpolator,
+	public ViewPropertyAnimator_ setInterpolator(int interpolator,
 			Object[] interpolatorValues) {
 
 		float[] floatValues = AnimationUtils
@@ -261,159 +262,159 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy alpha(float value) {
+	public ViewPropertyAnimator_ alpha(float value) {
 		alphaVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy alphaBy(float value) {
+	public ViewPropertyAnimator_ alphaBy(float value) {
 		alphaByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy opacity(float value) {
+	public ViewPropertyAnimator_ opacity(float value) {
 		// Convenience for those used to "opacity" in Titanium.
 		return alpha(value);
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy opacityBy(float value) {
+	public ViewPropertyAnimator_ opacityBy(float value) {
 		// Convenience for those used to "opacity" in Titanium.
 		return alphaBy(value);
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy x(Object value) {
+	public ViewPropertyAnimator_ x(Object value) {
 		xVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy xBy(Object value) {
+	public ViewPropertyAnimator_ xBy(Object value) {
 		xByVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy y(Object value) {
+	public ViewPropertyAnimator_ y(Object value) {
 		yVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy yBy(Object value) {
+	public ViewPropertyAnimator_ yBy(Object value) {
 		yByVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotation(float value) {
+	public ViewPropertyAnimator_ rotation(float value) {
 		rotationVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotationBy(float value) {
+	public ViewPropertyAnimator_ rotationBy(float value) {
 		rotationByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotationX(float value) {
+	public ViewPropertyAnimator_ rotationX(float value) {
 		rotationXVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotationXBy(float value) {
+	public ViewPropertyAnimator_ rotationXBy(float value) {
 		rotationXByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotationY(float value) {
+	public ViewPropertyAnimator_ rotationY(float value) {
 		rotationYVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy rotationYBy(float value) {
+	public ViewPropertyAnimator_ rotationYBy(float value) {
 		rotationYByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationX(Object value) {
+	public ViewPropertyAnimator_ translationX(Object value) {
 		translationXVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationXBy(Object value) {
+	public ViewPropertyAnimator_ translationXBy(Object value) {
 		translationXByVal = toPixels(value, Axis.X);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationY(Object value) {
+	public ViewPropertyAnimator_ translationY(Object value) {
 		translationYVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy translationYBy(Object value) {
+	public ViewPropertyAnimator_ translationYBy(Object value) {
 		translationYByVal = toPixels(value, Axis.Y);
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy scaleX(float value) {
+	public ViewPropertyAnimator_ scaleX(float value) {
 		scaleXVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy scaleXBy(float value) {
+	public ViewPropertyAnimator_ scaleXBy(float value) {
 		scaleXByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy scaleY(float value) {
+	public ViewPropertyAnimator_ scaleY(float value) {
 		scaleYVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy scaleYBy(float value) {
+	public ViewPropertyAnimator_ scaleYBy(float value) {
 		scaleYByVal = value;
 		scheduleStarter();
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy setListener(KrollFunction func) {
+	public ViewPropertyAnimator_ setListener(KrollFunction func) {
 		mListener = func;
 		return this;
 	}
@@ -461,13 +462,13 @@ public class ViewPropertyAnimatorProxy extends KrollProxy implements
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy withStartAction(KrollFunction function) {
+	public ViewPropertyAnimator_ withStartAction(KrollFunction function) {
 		mStartAction = function;
 		return this;
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy withEndAction(KrollFunction function) {
+	public ViewPropertyAnimator_ withEndAction(KrollFunction function) {
 		mEndAction = function;
 		return this;
 	}

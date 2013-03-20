@@ -28,8 +28,8 @@ public class ViewPropertyAnimatorFactory extends KrollProxy {
 	}
 
 	@Kroll.method
-	public ViewPropertyAnimatorProxy animate(TiViewProxy view) {
-		return new ViewPropertyAnimatorProxy(view);
+	public ViewPropertyAnimator_ animate(TiViewProxy view) {
+		return new ViewPropertyAnimator_(view);
 	}
 
 }
