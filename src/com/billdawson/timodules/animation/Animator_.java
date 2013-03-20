@@ -26,10 +26,10 @@ import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 
-@Kroll.proxy
-public abstract class AnimatorProxy extends KrollProxy implements
+@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="Animator")
+public abstract class Animator_ extends KrollProxy implements
 		AnimatorListener {
-	private static final String TAG = "AnimatorProxy";
+	private static final String TAG = "Animator_";
 	private static final long DEFAULT_DURATION = 300;
 
 	protected static final String WARN_ANIMATOR = "An Android Animator object could not be built. No animation will be started.";

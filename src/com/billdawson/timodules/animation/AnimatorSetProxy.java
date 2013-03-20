@@ -22,7 +22,7 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 
 @Kroll.proxy(creatableInModule = AndroidanimationModule.class)
-public class AnimatorSetProxy extends AnimatorProxy {
+public class AnimatorSetProxy extends Animator_ {
 
 	enum PlayOrder {
 		SEQUENTIALLY, TOGETHER, UNKNOWN
@@ -31,7 +31,7 @@ public class AnimatorSetProxy extends AnimatorProxy {
 	@SuppressWarnings("unused")
 	private static final String TAG = "AnimatorSetProxy";
 
-	private AnimatorProxy[] mChildAnimations;
+	private Animator_[] mChildAnimations;
 	private PlayOrder mPlayOrder = PlayOrder.UNKNOWN;
 
 	@Override
@@ -48,7 +48,7 @@ public class AnimatorSetProxy extends AnimatorProxy {
 		Animator[] children = new Animator[childCount];
 
 		for (int i = 0; i < childCount; i++) {
-			AnimatorProxy oneProxy = mChildAnimations[i];
+			Animator_ oneProxy = mChildAnimations[i];
 			oneProxy.buildAnimator();
 			children[i] = oneProxy.getAnimator();
 
@@ -76,18 +76,18 @@ public class AnimatorSetProxy extends AnimatorProxy {
 
 	@Kroll.method
 	@Kroll.getProperty
-	public AnimatorProxy[] getChildAnimations() {
+	public Animator_[] getChildAnimations() {
 		return mChildAnimations;
 	}
 
 	@Kroll.method
-	public void playSequentially(AnimatorProxy[] animations) {
+	public void playSequentially(Animator_[] animations) {
 		mChildAnimations = animations;
 		mPlayOrder = PlayOrder.SEQUENTIALLY;
 	}
 
 	@Kroll.method
-	public void playTogether(AnimatorProxy[] animations) {
+	public void playTogether(Animator_[] animations) {
 		mChildAnimations = animations;
 		mPlayOrder = PlayOrder.TOGETHER;
 	}
