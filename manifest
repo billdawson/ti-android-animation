@@ -1,4 +1,4 @@
-version: 1.0
+version: 0.9
 apiversion: 2
 description: Wrap of Jake Wharton's (@JakeWharton) NineOldAndroids library to enable Honeycomb (and greater) animations in Titanium.
 author: Bill Dawson

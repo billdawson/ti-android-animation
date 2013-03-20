@@ -40,7 +40,7 @@
 		<theme>default</theme>
 	</mobileweb>
 	<modules>
-		<module platform="android" version="1.0">com.billdawson.timodules.animation</module>
+		<module platform="android" version="0.9">com.billdawson.timodules.animation</module>
 	</modules>
 	<property name="ti.android.bug2373.disableDetection" type="bool">true</property>
 </ti:app>
