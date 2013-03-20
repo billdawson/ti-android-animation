@@ -39,7 +39,7 @@ enum PropertyDataType {
 /**
  * Use this to animate View properties when faced with any of these circumstances:
  * - The View property which you wish to animate cannot be animated via the
- *   [ViewPropertyAnimator](@ref views.ViewPropertyAnimatorProxy). A very common
+ *   [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_). A very common
  *   example of such a property would be `backgroundColor`.
  * - You want to animate a View property *from* a specific value *to* a specific
  *   value, and the *from* value is not the current value for that property. In
@@ -60,7 +60,7 @@ enum PropertyDataType {
  *     var animator = module.objectAnimator.ofFloat(view, "propertyName", fromVal,
  *         toVal);
  * 
- * As you might guess, you'll use [ofInt](@ref ObjectAnimatorFactoryProxy#ofInt) when...
+ * As you might guess, you'll use [ofInt](@ref ObjectAnimatorFactory#ofInt) when...
  * 
  * @since 1.0
  * 
