@@ -35,6 +35,10 @@ import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+/**
+ * This class provides a fluent interface to quickly and easily
+ * animate several properties of an Android View.
+ */
 @Kroll.proxy
 public class ViewPropertyAnimatorProxy extends KrollProxy implements
 		AnimatorListener {

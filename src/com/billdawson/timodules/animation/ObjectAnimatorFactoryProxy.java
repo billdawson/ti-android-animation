@@ -19,6 +19,12 @@ package com.billdawson.timodules.animation;
 import org.appcelerator.kroll.KrollProxy;
 import org.appcelerator.kroll.annotations.Kroll;
 
+/**
+ * You do not use this class directly. It is what is returned
+ * by [module.objectAnimator](@ref AndroidanimationModule#getObjectAnimator)
+ * and contains the `ofInt` and `ofFloat` factory methods which
+ * return new [ObjectAnimator](@ref ObjectAnimator) instances.
+ */
 @Kroll.proxy
 public class ObjectAnimatorFactoryProxy extends KrollProxy {
 	@SuppressWarnings("unused")
@@ -32,6 +38,13 @@ public class ObjectAnimatorFactoryProxy extends KrollProxy {
 				PropertyDataType.FLOAT, varArgs);
 	}
 
+	/**
+	 * Return an instance of ObjectAnimator.
+	 * @param object
+	 * @param propertyName
+	 * @param varArgs
+	 * @return 
+	 */
 	@Kroll.method
 	public ObjectAnimatorProxy ofInt(Object object, String propertyName,
 			Object[] varArgs) {

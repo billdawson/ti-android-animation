@@ -62,8 +62,10 @@ samples below.
 
     var mod = require("com.billdawson.timodules.animation"),
 	    view = Ti.UI.createView();
+
 	// setup the window and view, etc....
 	// ... then later ...
+
 	mod.viewPropertyAnimator.animate(view)
 		.setDuration(1000)
 		.withEndAction(function() {
@@ -90,6 +92,7 @@ ObjectAnimator for that.
 
 	// setup the window and view, etc....
 	// ... then later ...
+
 	// Use the Android evaluator that is
 	// specifically for ARGB (alpha/red/green/blue)
 	// values.
@@ -98,6 +101,7 @@ ObjectAnimator for that.
 	animator.addEventListener("start", function() {
 		Ti.API.info("Animation started!");
 	});
+
 	// Animate backgroundColor from
 	// #FF00FF00 to #AAFF0000 over
 	// 2 seconds.
@@ -118,6 +122,7 @@ ObjectAnimator for that.
     
 	// setup the window and view, etc....
 	// ... then later ...
+
 	animatorSet.playTogether([animateColor, animateScaleX, animateScaleY]);
 	animatorSet.start();
 

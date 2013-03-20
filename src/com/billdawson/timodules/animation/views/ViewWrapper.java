@@ -27,8 +27,8 @@ import android.os.Build;
 import android.view.View;
 
 /**
- * Wraps a view so that certain property getters/setters that don't really exist
- * (such as "backgroundColor") can be animated.
+ * \internal Wraps a view so that certain property getters/setters that don't
+ * really exist (such as "backgroundColor") can be animated.
  * 
  * @author Bill Dawson
  * 

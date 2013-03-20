@@ -36,6 +36,35 @@ enum PropertyDataType {
 	FLOAT, INT, UNKNOWN
 }
 
+/**
+ * Use this to animate View properties when faced with any of these circumstances:
+ * - The View property which you wish to animate cannot be animated via the
+ *   [ViewPropertyAnimator](@ref views.ViewPropertyAnimatorProxy). A very common
+ *   example of such a property would be `backgroundColor`.
+ * - You want to animate a View property *from* a specific value *to* a specific
+ *   value, and the *from* value is not the current value for that property. In
+ *   that case, you cannot use a `ViewPropertyAnimator` because its methods do not
+ *   accept *from* values, so use this class instead.
+ * - You wish to include one or more animations together in an
+ *   [AnimatorSet](@ref AnimatorSet). The `AnimatorSet` does not
+ *   accept `ViewPropertyAnimator` instances; you must give it instances of this class.
+ * 
+ * The preferred way to instantiate this class is via one of the two factory
+ * methods available in the module.
+ * 
+ *     var animator = module.objectAnimator.ofInt(view, "propertyName", fromVal,
+ *         toVal);
+ * 
+ * or
+ * 
+ *     var animator = module.objectAnimator.ofFloat(view, "propertyName", fromVal,
+ *         toVal);
+ * 
+ * As you might guess, you'll use [ofInt](@ref ObjectAnimatorFactoryProxy#ofInt) when...
+ * 
+ * @since 1.0
+ * 
+ */
 @Kroll.proxy(creatableInModule = AndroidanimationModule.class)
 public class ObjectAnimatorProxy extends AnimatorProxy {
 	private static final String TAG = "ObjectAnimatorProxy";
@@ -105,16 +134,16 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 			}
 
 			switch (mPropertyType) {
-			case FLOAT:
-				animator = ObjectAnimator.ofFloat(actualObject, propertyName,
-						mFloatValues);
-				break;
-			case INT:
-				animator = ObjectAnimator.ofInt(actualObject, propertyName,
-						mIntValues);
-				break;
-			case UNKNOWN:
-				break;
+				case FLOAT:
+					animator = ObjectAnimator.ofFloat(actualObject,
+							propertyName, mFloatValues);
+					break;
+				case INT:
+					animator = ObjectAnimator.ofInt(actualObject, propertyName,
+							mIntValues);
+					break;
+				case UNKNOWN:
+					break;
 			}
 
 		}
@@ -129,17 +158,17 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 
 		if (mEvaluator != AndroidanimationModule.NO_INT_VALUE) {
 			switch (mEvaluator) {
-			case AndroidanimationModule.INT_EVALUATOR:
-				animator.setEvaluator(new IntEvaluator());
-				break;
-			case AndroidanimationModule.FLOAT_EVALUATOR:
-				animator.setEvaluator(new FloatEvaluator());
-				break;
-			case AndroidanimationModule.ARGB_EVALUATOR:
-				animator.setEvaluator(new ArgbEvaluator());
-				break;
-			default:
-				Log.w(TAG, "Evaluator set to unknown value: " + mEvaluator);
+				case AndroidanimationModule.INT_EVALUATOR:
+					animator.setEvaluator(new IntEvaluator());
+					break;
+				case AndroidanimationModule.FLOAT_EVALUATOR:
+					animator.setEvaluator(new FloatEvaluator());
+					break;
+				case AndroidanimationModule.ARGB_EVALUATOR:
+					animator.setEvaluator(new ArgbEvaluator());
+					break;
+				default:
+					Log.w(TAG, "Evaluator set to unknown value: " + mEvaluator);
 			}
 		}
 
@@ -153,6 +182,9 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 
 	@Kroll.method
 	@Kroll.getProperty
+	/**
+	 * Gets the evaluator.
+	 */
 	public int getEvaluator() {
 		return mEvaluator;
 	}
@@ -193,7 +225,17 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 
 	@Kroll.method
 	@Kroll.setProperty
-	public void setIntValues(Object[] values) {
+	/**
+	 * If you are animating a property that takes integer values,
+	 * use this setter method to animate between one or more values.
+	 * If you pass just one value, then the animation will be from
+	 * the _current_ value to the value you give here. If you pass
+	 * more than one value, then the animation will start from the
+	 * first value you provide and end with the last value you provide.
+	 * The two typical use cases are to provide either one value or
+	 * two values.
+	 */
+	public void setIntValues(Object... values) {
 		if (mPropertyType == PropertyDataType.UNKNOWN) {
 			mPropertyType = PropertyDataType.INT;
 		}

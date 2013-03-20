@@ -150,6 +150,9 @@ public abstract class AnimatorProxy extends KrollProxy implements
 
 	@Kroll.method
 	@Kroll.setProperty
+	/**
+	 * Sets the interpolator values.
+	 */
 	public void setInterpolatorValues(Object values) {
 		if (values == null) {
 			mInterpolatorValues = null;
