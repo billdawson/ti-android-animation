@@ -25,16 +25,16 @@ import org.appcelerator.kroll.annotations.Kroll;
  * and contains the `ofInt` and `ofFloat` factory methods which
  * return new [ObjectAnimator](@ref ObjectAnimator) instances.
  */
-@Kroll.proxy
-public class ObjectAnimatorFactoryProxy extends KrollProxy {
+@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="ObjectAnimatorFactory")
+public class ObjectAnimatorFactory extends KrollProxy {
 	@SuppressWarnings("unused")
-	private static final String TAG = "ObjectAnimatorFactoryProxy";
+	private static final String TAG = "ObjectAnimatorFactory";
 
 	@Kroll.method
-	public ObjectAnimatorProxy ofFloat(Object object, String propertyName,
+	public ObjectAnimator_ ofFloat(Object object, String propertyName,
 			Object[] varArgs) {
 
-		return new ObjectAnimatorProxy(object, propertyName,
+		return new ObjectAnimator_(object, propertyName,
 				PropertyDataType.FLOAT, varArgs);
 	}
 
@@ -46,10 +46,10 @@ public class ObjectAnimatorFactoryProxy extends KrollProxy {
 	 * @return 
 	 */
 	@Kroll.method
-	public ObjectAnimatorProxy ofInt(Object object, String propertyName,
+	public ObjectAnimator_ ofInt(Object object, String propertyName,
 			Object[] varArgs) {
 
-		return new ObjectAnimatorProxy(object, propertyName,
+		return new ObjectAnimator_(object, propertyName,
 				PropertyDataType.INT, varArgs);
 	}
 

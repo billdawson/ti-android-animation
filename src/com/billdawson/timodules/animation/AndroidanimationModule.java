@@ -205,7 +205,7 @@ public class AndroidanimationModule extends KrollModule {
 	@SuppressWarnings("unused")
 	private static final String TAG = "AndroidanimationModule";
 
-	private static final ObjectAnimatorFactoryProxy mObjectAnimatorFactory = new ObjectAnimatorFactoryProxy();
+	private static final ObjectAnimatorFactory mObjectAnimatorFactory = new ObjectAnimatorFactory();
 	private static final ViewPropertyAnimatorFactoryProxy mViewPropertyAnimatorFactory = new ViewPropertyAnimatorFactoryProxy();
 
 	public static final long NO_LONG_VALUE = Long.MIN_VALUE;
@@ -254,7 +254,7 @@ public class AndroidanimationModule extends KrollModule {
 	 */
 	@Kroll.method
 	@Kroll.getProperty
-	public ObjectAnimatorFactoryProxy getObjectAnimator() {
+	public ObjectAnimatorFactory getObjectAnimator() {
 		return mObjectAnimatorFactory;
 	}
 

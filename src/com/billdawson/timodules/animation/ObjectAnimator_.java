@@ -65,9 +65,9 @@ enum PropertyDataType {
  * @since 1.0
  * 
  */
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class)
-public class ObjectAnimatorProxy extends AnimatorProxy {
-	private static final String TAG = "ObjectAnimatorProxy";
+@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="ObjectAnimator")
+public class ObjectAnimator_ extends AnimatorProxy {
+	private static final String TAG = "ObjectAnimator_";
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
 	private static final String ERR_INT_VALUE = "Values must be set to numeric array or array of strings containing color codes.";
 
@@ -79,12 +79,12 @@ public class ObjectAnimatorProxy extends AnimatorProxy {
 	private int mRepeatMode = AndroidanimationModule.NO_INT_VALUE;
 	private int mEvaluator = AndroidanimationModule.NO_INT_VALUE;
 
-	public ObjectAnimatorProxy() {
+	public ObjectAnimator_() {
 		super();
 		this.mPropertyType = PropertyDataType.UNKNOWN;
 	}
 
-	protected ObjectAnimatorProxy(Object object, String propertyName,
+	protected ObjectAnimator_(Object object, String propertyName,
 			PropertyDataType propertyType, Object[] values) {
 		this();
 		setTarget(object);
