@@ -21,15 +21,15 @@ import org.appcelerator.kroll.annotations.Kroll;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class)
-public class AnimatorSetProxy extends Animator_ {
+@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="AnimatorSet")
+public class AnimatorSet_ extends Animator_ {
 
 	enum PlayOrder {
 		SEQUENTIALLY, TOGETHER, UNKNOWN
 	};
 
 	@SuppressWarnings("unused")
-	private static final String TAG = "AnimatorSetProxy";
+	private static final String TAG = "AnimatorSet_";
 
 	private Animator_[] mChildAnimations;
 	private PlayOrder mPlayOrder = PlayOrder.UNKNOWN;
