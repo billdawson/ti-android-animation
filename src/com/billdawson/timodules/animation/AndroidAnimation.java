@@ -44,7 +44,7 @@ package com.billdawson.timodules.animation;
  * ### Get the module's ZIP file
  *
  * You can either build the module from [source][3] (this assumes you know how to build Titanium
- * modules; no instructions are provided here for that) or get a recent ZIP from here (TODO TODO).
+ * modules; no instructions are provided here for that) or get a recent [packaged ZIP from Github][10].
  *
  * ### Place the module ZIP where it's accessible
  *
@@ -213,6 +213,7 @@ package com.billdawson.timodules.animation;
  * [7]: http://developer.android.com/reference/android/animation/ObjectAnimator.html
  * [8]: http://developer.android.com/reference/android/view/ViewPropertyAnimator.html
  * [9]: http://developer.android.com/reference/android/animation/AnimatorSet.html
+ * [10]: http://github.com/billdawson/ti-android-animation/tree/gh-pages/packaged
  */
 
 import org.appcelerator.kroll.KrollModule;
