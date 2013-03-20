@@ -48,7 +48,7 @@ enum PropertyDataType {
  *   that case, you cannot use a `ViewPropertyAnimator` because its methods do not
  *   accept *from* values, so use this class instead.
  * - You wish to include one or more animations together in an
- *   [AnimatorSet](@ref AnimatorSet). The `AnimatorSet` does not
+ *   [AnimatorSet](@ref AnimatorSet_). The `AnimatorSet` does not
  *   accept `ViewPropertyAnimator` instances; you must give it instances of this class.
  *   
  * Your first choice should always be the [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_)

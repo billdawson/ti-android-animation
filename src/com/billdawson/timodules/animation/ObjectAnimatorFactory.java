@@ -23,7 +23,7 @@ import org.appcelerator.kroll.annotations.Kroll;
  * You do not use this class directly. It is what is returned
  * by [module.objectAnimator](@ref AndroidAnimation#getObjectAnimator)
  * and contains the `ofInt` and `ofFloat` factory methods which
- * return new [ObjectAnimator](@ref ObjectAnimator) instances.
+ * return new [ObjectAnimator](@ref ObjectAnimator_) instances.
  * 
  * @since 1.0
  */
