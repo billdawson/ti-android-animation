@@ -26,8 +26,17 @@ to find recent ZIPs of it at ... (TODO).
 Usage
 =====
 
-Please see documentation/index.md for instructions on how to use the module in
-your Titanium app. You can also find samples under example/.
+Please see documentation for instructions on how to use the module in
+your Titanium app. You can also find code samples under the example/ folder.
+
+Meanwhile here is a very quick example of using the view property animator made
+available via this module:
+
+    var animationModule = require("com.billdawson.timodules.animation");
+	
+	//... setup window / views ...
+    
+    animationModule.viewPropertyAnimator.animate(myView).xBy(50).yBy(50);
 
 Developed By
 ============

@@ -65,7 +65,7 @@ enum PropertyDataType {
  * @since 1.0
  * 
  */
-@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="ObjectAnimator")
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name = "ObjectAnimator")
 public class ObjectAnimator_ extends Animator_ {
 	private static final String TAG = "ObjectAnimator_";
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
@@ -180,21 +180,28 @@ public class ObjectAnimator_ extends Animator_ {
 
 	// Public-facing Kroll methods/properties.
 
-	@Kroll.method
-	@Kroll.getProperty
 	/**
 	 * Gets the evaluator.
+	 * @since 1.0
 	 */
+	@Kroll.method
+	@Kroll.getProperty
 	public int getEvaluator() {
 		return mEvaluator;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setEvaluator(int evaluator) {
 		mEvaluator = evaluator;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void reverse() {
 		buildAnimator();
@@ -211,12 +218,18 @@ public class ObjectAnimator_ extends Animator_ {
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public String getPropertyName() {
 		return mPropertyName;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setPropertyName(String propertyName) {
@@ -234,6 +247,8 @@ public class ObjectAnimator_ extends Animator_ {
 	 * first value you provide and end with the last value you provide.
 	 * The two typical use cases are to provide either one value or
 	 * two values.
+	 * 
+	 * @since 1.0
 	 */
 	public void setIntValues(Object... values) {
 		if (mPropertyType == PropertyDataType.UNKNOWN) {
@@ -264,6 +279,9 @@ public class ObjectAnimator_ extends Animator_ {
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setFloatValues(Object[] values) {
@@ -280,24 +298,36 @@ public class ObjectAnimator_ extends Animator_ {
 
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public int getRepeatCount() {
 		return mRepeatCount;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setRepeatCount(int repeatCount) {
 		this.mRepeatCount = repeatCount;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public int getRepeatMode() {
 		return mRepeatMode;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setRepeatMode(int repeatMode) {

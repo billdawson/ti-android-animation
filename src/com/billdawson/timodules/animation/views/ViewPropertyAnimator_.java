@@ -38,9 +38,10 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
 /**
  * This class provides a fluent interface to quickly and easily
  * animate several properties of an Android View.
+ * 
+ * @since 1.0
  */
-@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidAnimation.class,
-		name="ViewPropertyAnimator")
+@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidAnimation.class, name = "ViewPropertyAnimator")
 public class ViewPropertyAnimator_ extends KrollProxy implements
 		AnimatorListener {
 
@@ -112,28 +113,43 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		mAnimator.setListener(this);
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setDuration(long milliseconds) {
 		mAnimator.setDuration(milliseconds);
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public long getDuration() {
 		return mAnimator.getDuration();
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public long getStartDelay() {
 		return mAnimator.getStartDelay();
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setStartDelay(long milliseconds) {
 		mAnimator.setStartDelay(milliseconds);
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setInterpolator(int interpolator,
 			Object[] interpolatorValues) {
@@ -145,6 +161,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void start() {
 		mHandler.removeCallbacks(mAnimationStarter);
@@ -238,6 +257,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void cancel() {
 		TiMessenger.postOnMain(new Runnable() {
@@ -261,6 +283,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return AnimationUtils.toPixels(mDisplayMetrics, value, axis);
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ alpha(float value) {
 		alphaVal = value;
@@ -268,6 +293,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ alphaBy(float value) {
 		alphaByVal = value;
@@ -275,18 +303,27 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ opacity(float value) {
 		// Convenience for those used to "opacity" in Titanium.
 		return alpha(value);
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ opacityBy(float value) {
 		// Convenience for those used to "opacity" in Titanium.
 		return alphaBy(value);
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ x(Object value) {
 		xVal = toPixels(value, Axis.X);
@@ -294,6 +331,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ xBy(Object value) {
 		xByVal = toPixels(value, Axis.X);
@@ -301,6 +341,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ y(Object value) {
 		yVal = toPixels(value, Axis.Y);
@@ -308,6 +351,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ yBy(Object value) {
 		yByVal = toPixels(value, Axis.Y);
@@ -315,6 +361,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotation(float value) {
 		rotationVal = value;
@@ -322,6 +371,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotationBy(float value) {
 		rotationByVal = value;
@@ -329,6 +381,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotationX(float value) {
 		rotationXVal = value;
@@ -336,6 +391,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotationXBy(float value) {
 		rotationXByVal = value;
@@ -343,6 +401,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotationY(float value) {
 		rotationYVal = value;
@@ -350,6 +411,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ rotationYBy(float value) {
 		rotationYByVal = value;
@@ -357,6 +421,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ translationX(Object value) {
 		translationXVal = toPixels(value, Axis.X);
@@ -364,6 +431,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ translationXBy(Object value) {
 		translationXByVal = toPixels(value, Axis.X);
@@ -371,6 +441,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ translationY(Object value) {
 		translationYVal = toPixels(value, Axis.Y);
@@ -378,6 +451,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ translationYBy(Object value) {
 		translationYByVal = toPixels(value, Axis.Y);
@@ -385,6 +461,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ scaleX(float value) {
 		scaleXVal = value;
@@ -392,6 +471,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ scaleXBy(float value) {
 		scaleXByVal = value;
@@ -399,6 +481,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ scaleY(float value) {
 		scaleYVal = value;
@@ -406,6 +491,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ scaleYBy(float value) {
 		scaleYByVal = value;
@@ -413,6 +501,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setListener(KrollFunction func) {
 		mListener = func;
@@ -461,12 +552,18 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 		callListener("start");
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ withStartAction(KrollFunction function) {
 		mStartAction = function;
 		return this;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ withEndAction(KrollFunction function) {
 		mEndAction = function;

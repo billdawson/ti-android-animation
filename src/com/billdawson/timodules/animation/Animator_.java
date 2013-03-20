@@ -26,9 +26,11 @@ import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 
-@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="Animator")
-public abstract class Animator_ extends KrollProxy implements
-		AnimatorListener {
+/**
+ * @since 1.0
+ */
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name = "Animator")
+public abstract class Animator_ extends KrollProxy implements AnimatorListener {
 	private static final String TAG = "Animator_";
 	private static final long DEFAULT_DURATION = 300;
 
@@ -75,18 +77,27 @@ public abstract class Animator_ extends KrollProxy implements
 
 	// Public facing Kroll methods/properties.
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public long getDuration() {
 		return mDuration;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setDuration(long milliseconds) {
 		mDuration = milliseconds;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void cancel() {
 		if (mAnimator != null) {
@@ -99,6 +110,9 @@ public abstract class Animator_ extends KrollProxy implements
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void end() {
 		if (mAnimator != null) {
@@ -111,6 +125,9 @@ public abstract class Animator_ extends KrollProxy implements
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void start() {
 		buildAnimator();
@@ -126,28 +143,43 @@ public abstract class Animator_ extends KrollProxy implements
 		}
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public boolean isRunning() {
 		return mAnimator == null ? false : mAnimator.isRunning();
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public boolean isStarted() {
 		return mAnimator == null ? false : mAnimator.isStarted();
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public int getInterpolator() {
 		return mInterpolator;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setInterpolator(int interpolator) {
 		this.mInterpolator = interpolator;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	/**
@@ -168,30 +200,45 @@ public abstract class Animator_ extends KrollProxy implements
 		mInterpolatorValues = AnimationUtils.unboxFloatValues(arrayValues);
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public float[] getInterpolatorValues() {
 		return mInterpolatorValues;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public Object getTarget() {
 		return mTarget;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setTarget(Object target) {
 		this.mTarget = target;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public long getStartDelay() {
 		return mStartDelay;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.setProperty
 	public void setStartDelay(long startDelay) {

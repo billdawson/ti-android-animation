@@ -21,7 +21,10 @@ import org.appcelerator.kroll.annotations.Kroll;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 
-@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="AnimatorSet")
+/**
+ * @since 1.0
+ */
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name = "AnimatorSet")
 public class AnimatorSet_ extends Animator_ {
 
 	enum PlayOrder {
@@ -74,18 +77,27 @@ public class AnimatorSet_ extends Animator_ {
 
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public Animator_[] getChildAnimations() {
 		return mChildAnimations;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void playSequentially(Animator_[] animations) {
 		mChildAnimations = animations;
 		mPlayOrder = PlayOrder.SEQUENTIALLY;
 	}
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.method
 	public void playTogether(Animator_[] animations) {
 		mChildAnimations = animations;

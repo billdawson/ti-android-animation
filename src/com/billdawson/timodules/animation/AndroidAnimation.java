@@ -72,8 +72,10 @@ package com.billdawson.timodules.animation;
  * 
  * ### ViewPropertyAnimator
  * 
- * Note that the `ViewPropertyAnimator` has a fluent interface (e.g. method
- * chaining), just like the native Android [ViewPropertyAnimator][6].
+ * You'll see in the example below that the 
+ * [ViewPropertyAnimator](@ref views.ViewPropertyAnimator_) has a fluent
+ * interface (e.g. method chaining), just like the native Android 
+ * [ViewPropertyAnimator][6].
  * 
  *     var mod = require("com.billdawson.timodules.animation"),
  * 	       view = Ti.UI.createView();
@@ -89,14 +91,25 @@ package com.billdawson.timodules.animation;
  *        .scaleXBy(0.5)
  *        .scaleXBy(0.5)
  *        .alpha(0.75);
+ *
+ * Note from the example above how you get an instance of the `ViewPropertyAnimator`:
+ * *not* through a `createViewPropertyAnimator` method, but rather through a special
+ * factory method:
+ * 
+ *     mod.viewPropertyAnimator.animate(view);
+ * 
+ * Note also that you likely don't even need to hold a reference to the instance in
+ * a variable since the interface is fluent.
  * 
  * ### ObjectAnimator
  * 
- * Using `backgroundColor` as a good example here because
+ * In this example of using an [ObjectAnimator](@ref ObjectAnimator_),
+ * we animate the `backgroundColor` property of a View. The
+ * `backgroundProperty` is a good example here because
  * the `ViewPropertyAnimator` (above) *cannot* be
  * used to animate the `backgroundColor` (the same
  * is true for native Android), so you must use
- * `ObjectAnimator` for that.
+ * `ObjectAnimator` to animate it.
  * 
  *     var mod = require("com.billdawson.timodules.animation"),
  *         view = Ti.UI.createView({
@@ -123,6 +136,10 @@ package com.billdawson.timodules.animation;
  *     animator.start();
  *
  * ### AnimatorSet
+ * 
+ * The [AnimatorSet](@ref AnimatorSet_) can be used to run several
+ * [ObjectAnimator](@ref ObjectAnimator_) animations together
+ * simultaneously or sequentially.
  * 
  *     var mod = require("com.billdawson.timodules.animation"),
  *         view = Ti.UI.createView({
@@ -195,9 +212,11 @@ import com.nineoldandroids.animation.ValueAnimator;
 /**
  * This is the module itself. In your Javascript code you won't use
  * the name `AndroidAnimation` itself, but instead set a variable to
- * the result of `require`ing the module using its full id.
+ * the result of `require`ing the module using its full id. For example:
  * 
  *      var animationModule = require("com.billdawson.timodules.animation);
+ *      
+ * @since 1.0
  */
 @Kroll.module(name = "AndroidAnimation", id = "com.billdawson.timodules.animation")
 public class AndroidAnimation extends KrollModule {
@@ -211,36 +230,93 @@ public class AndroidAnimation extends KrollModule {
 	public static final long NO_LONG_VALUE = Long.MIN_VALUE;
 	public static final int NO_INT_VALUE = Integer.MIN_VALUE;
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int INT_EVALUATOR = 1;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int FLOAT_EVALUATOR = 2;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int ARGB_EVALUATOR = 3;
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int INFINITE = ValueAnimator.INFINITE;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int RESTART = ValueAnimator.RESTART;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int REVERSE = ValueAnimator.REVERSE;
 
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int ACCELERATE_INTERPOLATOR = 1;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int DECELERATE_INTERPOLATOR = 2;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int ACCELERATE_DECELERATE_INTERPOLATOR = 3;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int ANTICIPATE_INTERPOLATOR = 4;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int ANTICIPATE_OVERSHOOT_INTERPOLATOR = 5;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int BOUNCE_INTERPOLATOR = 6;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int CYCLE_INTERPOLATOR = 7;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int OVERSHOOT_INTERPOLATOR = 8;
+
+	/**
+	 * @since 1.0
+	 */
 	@Kroll.constant
 	public static final int LINEAR_INTERPOLATOR = 9;
 
@@ -251,6 +327,7 @@ public class AndroidAnimation extends KrollModule {
 	/**
 	 * Returns a factory for the [Object
 	 * @return
+	 * @since 1.0
 	 */
 	@Kroll.method
 	@Kroll.getProperty
@@ -258,6 +335,11 @@ public class AndroidAnimation extends KrollModule {
 		return mObjectAnimatorFactory;
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @since 1.0
+	 */
 	@Kroll.method
 	@Kroll.getProperty
 	public ViewPropertyAnimatorFactory getViewPropertyAnimator() {
