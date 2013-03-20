@@ -194,16 +194,16 @@ import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * This is the module itself. In your Javascript code you won't use
- * the name `Androidanimation` itself, but instead set a variable to
+ * the name `AndroidAnimation` itself, but instead set a variable to
  * the result of `require`ing the module using its full id.
  * 
  *      var animationModule = require("com.billdawson.timodules.animation);
  */
-@Kroll.module(name = "Androidanimation", id = "com.billdawson.timodules.animation")
-public class AndroidanimationModule extends KrollModule {
+@Kroll.module(name = "AndroidAnimation", id = "com.billdawson.timodules.animation")
+public class AndroidAnimation extends KrollModule {
 
 	@SuppressWarnings("unused")
-	private static final String TAG = "AndroidanimationModule";
+	private static final String TAG = "AndroidAnimation";
 
 	private static final ObjectAnimatorFactory mObjectAnimatorFactory = new ObjectAnimatorFactory();
 	private static final ViewPropertyAnimatorFactory mViewPropertyAnimatorFactory = new ViewPropertyAnimatorFactory();
@@ -244,7 +244,7 @@ public class AndroidanimationModule extends KrollModule {
 	@Kroll.constant
 	public static final int LINEAR_INTERPOLATOR = 9;
 
-	public AndroidanimationModule() {
+	public AndroidAnimation() {
 		super();
 	}
 

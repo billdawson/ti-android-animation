@@ -65,7 +65,7 @@ enum PropertyDataType {
  * @since 1.0
  * 
  */
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="ObjectAnimator")
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="ObjectAnimator")
 public class ObjectAnimator_ extends Animator_ {
 	private static final String TAG = "ObjectAnimator_";
 	private static final String PROPERTY_BACKGROUND_COLOR = "backgroundColor";
@@ -75,9 +75,9 @@ public class ObjectAnimator_ extends Animator_ {
 	private String mPropertyName;
 	private float[] mFloatValues;
 	private int[] mIntValues;
-	private int mRepeatCount = AndroidanimationModule.NO_INT_VALUE;
-	private int mRepeatMode = AndroidanimationModule.NO_INT_VALUE;
-	private int mEvaluator = AndroidanimationModule.NO_INT_VALUE;
+	private int mRepeatCount = AndroidAnimation.NO_INT_VALUE;
+	private int mRepeatMode = AndroidAnimation.NO_INT_VALUE;
+	private int mEvaluator = AndroidAnimation.NO_INT_VALUE;
 
 	public ObjectAnimator_() {
 		super();
@@ -148,23 +148,23 @@ public class ObjectAnimator_ extends Animator_ {
 
 		}
 
-		if (mRepeatCount != AndroidanimationModule.NO_INT_VALUE) {
+		if (mRepeatCount != AndroidAnimation.NO_INT_VALUE) {
 			animator.setRepeatCount(mRepeatCount);
 		}
 
-		if (mRepeatMode != AndroidanimationModule.NO_INT_VALUE) {
+		if (mRepeatMode != AndroidAnimation.NO_INT_VALUE) {
 			animator.setRepeatMode(mRepeatMode);
 		}
 
-		if (mEvaluator != AndroidanimationModule.NO_INT_VALUE) {
+		if (mEvaluator != AndroidAnimation.NO_INT_VALUE) {
 			switch (mEvaluator) {
-				case AndroidanimationModule.INT_EVALUATOR:
+				case AndroidAnimation.INT_EVALUATOR:
 					animator.setEvaluator(new IntEvaluator());
 					break;
-				case AndroidanimationModule.FLOAT_EVALUATOR:
+				case AndroidAnimation.FLOAT_EVALUATOR:
 					animator.setEvaluator(new FloatEvaluator());
 					break;
-				case AndroidanimationModule.ARGB_EVALUATOR:
+				case AndroidAnimation.ARGB_EVALUATOR:
 					animator.setEvaluator(new ArgbEvaluator());
 					break;
 				default:

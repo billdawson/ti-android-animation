@@ -39,7 +39,7 @@ import com.nineoldandroids.view.ViewPropertyAnimator;
  * This class provides a fluent interface to quickly and easily
  * animate several properties of an Android View.
  */
-@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidanimationModule.class,
+@Kroll.proxy(creatableInModule = com.billdawson.timodules.animation.AndroidAnimation.class,
 		name="ViewPropertyAnimator")
 public class ViewPropertyAnimator_ extends KrollProxy implements
 		AnimatorListener {

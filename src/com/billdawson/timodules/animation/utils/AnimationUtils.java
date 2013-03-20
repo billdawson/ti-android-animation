@@ -38,7 +38,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.OvershootInterpolator;
 
-import com.billdawson.timodules.animation.AndroidanimationModule;
+import com.billdawson.timodules.animation.AndroidAnimation;
 
 public class AnimationUtils {
 	enum ObjectType {
@@ -118,24 +118,24 @@ public class AnimationUtils {
 				: interpolatorValues.length;
 
 		switch (interpolatorType) {
-		case AndroidanimationModule.ACCELERATE_DECELERATE_INTERPOLATOR:
+		case AndroidAnimation.ACCELERATE_DECELERATE_INTERPOLATOR:
 			return new AccelerateDecelerateInterpolator();
 
-		case AndroidanimationModule.ACCELERATE_INTERPOLATOR:
+		case AndroidAnimation.ACCELERATE_INTERPOLATOR:
 			if (valueCount > 0) {
 				return new AccelerateInterpolator(interpolatorValues[0]);
 			} else {
 				return new AccelerateInterpolator();
 			}
 
-		case AndroidanimationModule.ANTICIPATE_INTERPOLATOR:
+		case AndroidAnimation.ANTICIPATE_INTERPOLATOR:
 			if (valueCount > 0) {
 				return new AnticipateInterpolator(interpolatorValues[0]);
 			} else {
 				return new AnticipateInterpolator();
 			}
 
-		case AndroidanimationModule.ANTICIPATE_OVERSHOOT_INTERPOLATOR:
+		case AndroidAnimation.ANTICIPATE_OVERSHOOT_INTERPOLATOR:
 			if (valueCount == 0) {
 				return new AnticipateOvershootInterpolator();
 			} else if (valueCount == 1) {
@@ -146,10 +146,10 @@ public class AnimationUtils {
 						interpolatorValues[0], interpolatorValues[1]);
 			}
 
-		case AndroidanimationModule.BOUNCE_INTERPOLATOR:
+		case AndroidAnimation.BOUNCE_INTERPOLATOR:
 			return new BounceInterpolator();
 
-		case AndroidanimationModule.CYCLE_INTERPOLATOR:
+		case AndroidAnimation.CYCLE_INTERPOLATOR:
 			if (valueCount > 0) {
 				return new CycleInterpolator(interpolatorValues[0]);
 			} else {
@@ -158,14 +158,14 @@ public class AnimationUtils {
 				return new CycleInterpolator(0f);
 			}
 
-		case AndroidanimationModule.DECELERATE_INTERPOLATOR:
+		case AndroidAnimation.DECELERATE_INTERPOLATOR:
 			if (valueCount > 0) {
 				return new DecelerateInterpolator(interpolatorValues[0]);
 			} else {
 				return new DecelerateInterpolator();
 			}
 
-		case AndroidanimationModule.OVERSHOOT_INTERPOLATOR:
+		case AndroidAnimation.OVERSHOOT_INTERPOLATOR:
 			if (valueCount > 0) {
 				return new OvershootInterpolator(interpolatorValues[0]);
 			} else {

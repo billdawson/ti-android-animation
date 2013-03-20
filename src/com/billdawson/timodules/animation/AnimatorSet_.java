@@ -21,7 +21,7 @@ import org.appcelerator.kroll.annotations.Kroll;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorSet;
 
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="AnimatorSet")
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="AnimatorSet")
 public class AnimatorSet_ extends Animator_ {
 
 	enum PlayOrder {

@@ -21,11 +21,11 @@ import org.appcelerator.kroll.annotations.Kroll;
 
 /**
  * You do not use this class directly. It is what is returned
- * by [module.objectAnimator](@ref AndroidanimationModule#getObjectAnimator)
+ * by [module.objectAnimator](@ref AndroidAnimation#getObjectAnimator)
  * and contains the `ofInt` and `ofFloat` factory methods which
  * return new [ObjectAnimator](@ref ObjectAnimator) instances.
  */
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="ObjectAnimatorFactory")
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="ObjectAnimatorFactory")
 public class ObjectAnimatorFactory extends KrollProxy {
 	@SuppressWarnings("unused")
 	private static final String TAG = "ObjectAnimatorFactory";

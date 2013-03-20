@@ -26,7 +26,7 @@ import com.billdawson.timodules.animation.utils.AnimationUtils;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.Animator.AnimatorListener;
 
-@Kroll.proxy(creatableInModule = AndroidanimationModule.class, name="Animator")
+@Kroll.proxy(creatableInModule = AndroidAnimation.class, name="Animator")
 public abstract class Animator_ extends KrollProxy implements
 		AnimatorListener {
 	private static final String TAG = "Animator_";
@@ -37,10 +37,10 @@ public abstract class Animator_ extends KrollProxy implements
 	public static final String EVENT_REPEAT = "repeat";
 
 	private Object mTarget = null;
-	private long mStartDelay = AndroidanimationModule.NO_LONG_VALUE;
+	private long mStartDelay = AndroidAnimation.NO_LONG_VALUE;
 	private long mDuration = DEFAULT_DURATION;
 	private Animator mAnimator = null;
-	private int mInterpolator = AndroidanimationModule.NO_INT_VALUE;
+	private int mInterpolator = AndroidAnimation.NO_INT_VALUE;
 	private float[] mInterpolatorValues = null;
 
 	protected void setAnimator(Animator animator) {
@@ -61,11 +61,11 @@ public abstract class Animator_ extends KrollProxy implements
 			mAnimator.removeAllListeners();
 			mAnimator.addListener(this);
 
-			if (mStartDelay != AndroidanimationModule.NO_LONG_VALUE) {
+			if (mStartDelay != AndroidAnimation.NO_LONG_VALUE) {
 				mAnimator.setStartDelay(mStartDelay);
 			}
 
-			if (mInterpolator != AndroidanimationModule.NO_INT_VALUE) {
+			if (mInterpolator != AndroidAnimation.NO_INT_VALUE) {
 				mAnimator.setInterpolator(AnimationUtils.buildInterpolator(
 						mInterpolator, mInterpolatorValues));
 			}
