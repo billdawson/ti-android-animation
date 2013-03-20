@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Ti-android-animation by billdawson</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Ti-android-animation</h1>
+          <h2>Makes Honeycomb+ Animation API available to Titanium Android</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/billdawson/ti-android-animation/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/billdawson/ti-android-animation/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/billdawson/ti-android-animation" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>Android Animation for Titanium</h1>
+
+<p>This Titanium Android module makes the <a href="http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html">Honeycomb (Android 3.0) animation API</a>
+available to Titanium Android apps. It uses Jake Wharton's excellent
+<a href="http://nineoldandroids.com">NineOldAndroids</a> library to make the animations available on pre-Honeycomb
+devices as well.</p>
+
+<p>It does this by wrapping and exposing two types of animators that are native to
+the Honeycomb Animation API: <a href="https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/ObjectAnimator_.java">ObjectAnimator</a> (<a href="http://developer.android.com/reference/android/animation/ObjectAnimator.html">native</a>) and
+<a href="https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/views/ViewPropertyAnimator_.java">ViewPropertyAnimator</a> (<a href="http://developer.android.com/reference/android/view/ViewPropertyAnimator.html">native</a>).</p>
+
+<p>Additionally, it provides access to the <a href="https://github.com/billdawson/ti-android-animation/blob/master/src/com/billdawson/timodules/animation/AnimatorSet_.java">AnimatorSet</a> (<a href="http://developer.android.com/reference/android/animation/AnimatorSet.html">native</a>), which
+can run multiple <code>ObjectAnimator</code> instances either simultaneously or back-to-back.</p>
+
+<p>The real star of the bunch is the <code>ViewPropertyAnimator</code>, which is the one
+you should be trying to use first.</p>
+
+<h1>Build</h1>
+
+<p>The module has so far been built and tested only with Titanium 3.0.2. You build
+it the same as you would build any other Titanium module for Android. The build.xml
+Ant script is provided, but be sure your machine is setup to build Titanium
+Android modules. You can ensure this by creating and building your own test
+module using Titanium Studio. In a nutshell, you'll need the Android SDK, the
+Android NDK and Python.</p>
+
+<p>Full instructions on how to create and build Titanium modules for Android will
+not be provided here. Nor will instructions on how to put modules in to your
+Titanium app projects be provided here. Look elsewhere!</p>
+
+<p>If you don't wish to build but just want the packaged module, you should be able
+to find recent ZIPs of it at ... (TODO).</p>
+
+<h1>Usage</h1>
+
+<p>Please see documentation for instructions on how to use the module in
+your Titanium app. You can also find code samples under the example/ folder.</p>
+
+<p>Meanwhile here is a very quick example of using the view property animator made
+available via this module:</p>
+
+<pre><code>var animationModule = require("com.billdawson.timodules.animation");
+
+//... setup window / views ...
+
+animationModule.viewPropertyAnimator.animate(myView).xBy(50).yBy(50);
+</code></pre>
+
+<h1>Developed By</h1>
+
+<ul>
+<li>Bill Dawson (<a href="http://billdawson.com">http://billdawson.com</a>)</li>
+</ul><h1>License</h1>
+
+<pre><code>The original code herein is...
+
+Copyright 2013 William Dawson.
+
+The NineOldAndroids library, upon which this module is built, is...
+
+Copyright 2012 Jake Wharton.
+
+Both projects:
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+        </section>
+
+        <footer>
+          Ti-android-animation is maintained by <a href="https://github.com/billdawson">billdawson</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
