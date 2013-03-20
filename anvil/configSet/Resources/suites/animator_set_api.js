@@ -87,7 +87,7 @@ module.exports = new function() {
 		valueOf(testRun, function(){animSet.playTogether(animations);}).shouldNotThrowException();
 		returnAnimations = animSet.childAnimations;
 		valueOf(testRun, returnAnimations).shouldBeArray();
-		valueOf(testRun, returnAnimations.length).shouldBe(2);
+		valueOf(testRun, returnAnimations.length).shouldBe(animations.length);
 		oneAnimation = returnAnimations[0];
 		valueOf(testRun, oneAnimation).shouldBeObject();
 		valueOf(testRun, "" + oneAnimation).shouldBe("[object ObjectAnimator]");

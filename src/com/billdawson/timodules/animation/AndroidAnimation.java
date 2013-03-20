@@ -27,7 +27,15 @@ package com.billdawson.timodules.animation;
  * [NineOldAndroids][2] library to make the animations available on pre-Honeycomb
  * devices as well.
  *
- * The module doesn't follow the Android API _exactly_, but fairly closely.  
+ * The module doesn't follow the Android API _exactly_, but fairly closely.
+ * 
+ * It does this by wrapping and exposing two types of animators that are native to the Honeycomb Animation
+ * API: [ObjectAnimator](@ref ObjectAnimator_) and [ViewPropertyAnimator](@ref ViewPropertyAnimator_).
+ * Additionally it provides access to the [AnimatorSet](@ref AnimatorSet_), which can run multiple
+ * `ObjectAnimator` instances either simultaneously or back-to-back.
+ * 
+ * The real star of the bunch is the [ViewPropertyAnimator](@ref ViewPropertyAnimator_), which is the one
+ * you should be trying to use first.
  *
  * Accessing the Module in Your App Code
  * -------------------------------------

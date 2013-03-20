@@ -45,7 +45,7 @@ public class AnimatorSet_ extends Animator_ {
 					"playTogether or playSequentially must be called before using the AnimatorSet.");
 		}
 
-		AnimatorSet animator = (AnimatorSet) getAnimator();
+		AnimatorSet animator = new AnimatorSet();
 
 		int childCount = mChildAnimations == null ? 0 : mChildAnimations.length;
 		Animator[] children = new Animator[childCount];
@@ -55,10 +55,6 @@ public class AnimatorSet_ extends Animator_ {
 			oneProxy.buildAnimator();
 			children[i] = oneProxy.getAnimator();
 
-		}
-
-		if (animator == null) {
-			animator = new AnimatorSet();
 		}
 
 		if (mPlayOrder == PlayOrder.SEQUENTIALLY) {

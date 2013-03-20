@@ -37,7 +37,7 @@ public class ObjectAnimatorFactory extends KrollProxy {
 	 */
 	@Kroll.method
 	public ObjectAnimator_ ofFloat(Object object, String propertyName,
-			Object[] varArgs) {
+			Object... varArgs) {
 
 		return new ObjectAnimator_(object, propertyName,
 				PropertyDataType.FLOAT, varArgs);
@@ -53,7 +53,7 @@ public class ObjectAnimatorFactory extends KrollProxy {
 	 */
 	@Kroll.method
 	public ObjectAnimator_ ofInt(Object object, String propertyName,
-			Object[] varArgs) {
+			Object... varArgs) {
 
 		return new ObjectAnimator_(object, propertyName, PropertyDataType.INT,
 				varArgs);

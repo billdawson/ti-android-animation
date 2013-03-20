@@ -16,7 +16,8 @@ module.exports = new function() {
 	this.tests = [
 		{name: "constants"},
 		{name: "properties"},
-		{name: "methods"}
+		{name: "methods"},
+		{name: "toPixels"}
 
 	];
 
@@ -48,9 +49,33 @@ module.exports = new function() {
 	};
 
 	this.methods = function(testRun) {
+		var win,
+			view;
 		valueOf(testRun, "" + animMod.getViewPropertyAnimator()).shouldBe("[object ViewPropertyAnimatorFactory]");
 		valueOf(testRun, "" + animMod.getObjectAnimator()).shouldBe("[object ObjectAnimatorFactory]");
+
 		finish(testRun);
+
+	};
+
+	this.toPixels = function(testRun) {
+		var win,
+			view;
+
+		valueOf(testRun, animMod.toPixels).shouldBeFunction();
+
+		function test() {
+			var pixelValue = Math.floor(animMod.toPixels(view, "16dp")),
+				manualResult = Math.floor(16 * Ti.Platform.displayCaps.logicalDensityFactor);
+			valueOf(testRun, manualResult).shouldBe(pixelValue);
+
+			finish(testRun);
+		}
+
+		win = Ti.UI.createWindow();
+		win.add(view = Ti.UI.createView());
+		win.addEventListener("open", test);
+		win.open();
 	};
 
 };

@@ -6,6 +6,16 @@ available to Titanium Android apps. It uses Jake Wharton's excellent
 [NineOldAndroids][2] library to make the animations available on pre-Honeycomb
 devices as well.
 
+It does this by wrapping and exposing two types of animators that are native to
+the Honeycomb Animation API: [ObjectAnimator][3] ([native][4]) and
+[ViewPropertyAnimator][5] ([native][6]).
+
+Additionally, it provides access to the [AnimatorSet][7] ([native][8]), which
+can run multiple `ObjectAnimator` instances either simultaneously or back-to-back.
+
+The real star of the bunch is the `ViewPropertyAnimator`, which is the one
+you should be trying to use first.
+
 Build
 =====
 
@@ -70,6 +80,5 @@ License
 
 
 
- [1]: http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html
- [2]: http://nineoldandroids.com
-
+[1]: http://android-developers.blogspot.com/2011/02/animation-in-honeycomb.html
+[2]: http://nineoldandroids.com

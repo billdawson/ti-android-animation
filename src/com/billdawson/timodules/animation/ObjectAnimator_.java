@@ -141,7 +141,7 @@ public class ObjectAnimator_ extends Animator_ {
 	}
 
 	protected ObjectAnimator_(Object object, String propertyName,
-			PropertyDataType propertyType, Object[] values) {
+			PropertyDataType propertyType, Object... values) {
 		this();
 		setTarget(object);
 		mPropertyName = propertyName;
@@ -292,8 +292,6 @@ public class ObjectAnimator_ extends Animator_ {
 		this.mPropertyName = propertyName;
 	}
 
-	@Kroll.method
-	@Kroll.setProperty
 	/**
 	 * If you are animating a property whose data type is `int`,
 	 * you may use this setter method to animate between one or more values.
@@ -322,6 +320,8 @@ public class ObjectAnimator_ extends Animator_ {
 	 * 
 	 * @since 1.0
 	 */
+	@Kroll.method
+	@Kroll.setProperty
 	public void setIntValues(Object... values) {
 		if (mPropertyType == PropertyDataType.UNKNOWN) {
 			mPropertyType = PropertyDataType.INT;
@@ -398,11 +398,16 @@ public class ObjectAnimator_ extends Animator_ {
 	 * in which case the animation will "go through" the intermediary
 	 * values on its way to the final value.
 	 * 
+	 * We do **not** do pixel calculations for you,
+	 * so if you are animating a pixel value be sure to use
+	 * [toPixels](@ref AndroidAnimation#toPixels) first to get
+	 * the correct pixel value.
+	 * 
 	 * @since 1.0
 	 */
 	@Kroll.method
 	@Kroll.setProperty
-	public void setFloatValues(Object[] values) {
+	public void setFloatValues(Object... values) {
 		if (mPropertyType == PropertyDataType.UNKNOWN) {
 			mPropertyType = PropertyDataType.FLOAT;
 		}
