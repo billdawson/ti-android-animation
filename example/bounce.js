@@ -31,9 +31,11 @@ exports.run = function() {
 	view1.add(view3);
 
 	function runAnimation() {
+		button.enabled = false;
 		animMod.viewPropertyAnimator.animate(view2)
 			.setInterpolator(animMod.BOUNCE_INTERPOLATOR)
 			.setDuration(3000)
+			.setStartDelay(0)
 			.xBy("200dp")
 			.yBy("250dp")
 			.rotationBy(360 * 4)
@@ -44,11 +46,15 @@ exports.run = function() {
 				.setStartDelay(2000)
 				.xBy("-200dp")
 				.yBy("-250dp")
-				.rotationBy(-360*4);
+				.rotationBy(-360*4)
+				.withEndAction(function() {
+					button.enabled = true;
+				});
 			});
 		animMod.viewPropertyAnimator.animate(view3)
 			.setInterpolator(animMod.BOUNCE_INTERPOLATOR)
 			.setDuration(3000)
+			.setStartDelay(0)
 			.xBy("-200dp")
 			.yBy("250dp")
 			.rotationBy(-360 * 4)
@@ -59,7 +65,10 @@ exports.run = function() {
 				.setStartDelay(2000)
 				.xBy("200dp")
 				.yBy("-250dp")
-				.rotationBy(360*4);
+				.rotationBy(360*4)
+				.withEndAction(function() {
+					button.enabled = true;
+				});
 			});
 
 	}
