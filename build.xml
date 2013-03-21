@@ -9,6 +9,12 @@
 	<import file="${titanium.platform}/../module/android/build.xml"/>
 
 	<property name="anvil.config" location="${basedir}/anvil/configSet/configs/animation"/>
+	<target name="cleanall" depends="clean">
+		<delete dir="${build}"/>
+		<mkdir dir="${build}"/>
+		<delete dir="${basedir}/doxygen/output"/>
+		<mkdir dir="${basedir}/doxygen/output"/>
+	</target>
 	<target name="test" depends="clean,dist">
 		<copy todir="${anvil.config}">
 			<fileset dir="${dist}" includes="*.zip"/>
@@ -18,6 +24,23 @@
 		</exec>
 	</target>
 	<target name="doc">
-		<exec dir="${basedir}/documentation" executable="doxygen"/>
+		<exec dir="${basedir}/doxygen" executable="doxygen"/>
+	</target>
+	<target name="package_docs">
+		<ti.string property="module.id" string="${manifest.moduleid}" tolowercase="true"/>
+		<property name="zip.prefix" value="modules/android/${module.id}/${manifest.version}"/>
+		<property name="zip.file" value="${dist}/${module.id}-android-${manifest.version}.zip"/>
+		<exec dir="${basedir}" executable="zip">
+			<arg value="-d"/>
+			<arg value="${zip.file}"/>
+			<arg value="${zip.prefix}/documentation/index.html"/>
+		</exec>
+		<zip destfile="${zip.file}" update="true">
+			<zipfileset dir="${basedir}/doxygen/output/html" prefix="${zip.prefix}/documentation">
+				<include name="**/*"/>
+			</zipfileset>
+		</zip>
+	</target>
+	<target name="fulldist" depends="cleanall,dist,doc,package_docs">
 	</target>
 </project>
