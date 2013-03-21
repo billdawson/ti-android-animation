@@ -101,9 +101,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a81b54d1b2cc47676bf0037109e13d908"><td class="memItemLeft" align="right" valign="top">.method <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator_factory.html#a81b54d1b2cc47676bf0037109e13d908">ofFloat</a> (Object object, String propertyName, Object...varArgs)</td></tr>
+<tr class="memdesc:a81b54d1b2cc47676bf0037109e13d908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> instance prepared to animate a float property of the passed object.  <a href="#a81b54d1b2cc47676bf0037109e13d908">More...</a><br/></td></tr>
 <tr class="separator:a81b54d1b2cc47676bf0037109e13d908"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a076e89e02f9fdbf26fd5e81c9e185b29"><td class="memItemLeft" align="right" valign="top">.method <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator_factory.html#a076e89e02f9fdbf26fd5e81c9e185b29">ofInt</a> (Object object, String propertyName, Object...varArgs)</td></tr>
-<tr class="memdesc:a076e89e02f9fdbf26fd5e81c9e185b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return an instance of ObjectAnimator.  <a href="#a076e89e02f9fdbf26fd5e81c9e185b29">More...</a><br/></td></tr>
+<tr class="memdesc:a076e89e02f9fdbf26fd5e81c9e185b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> instance prepared to animate an integer property of the passed object.  <a href="#a076e89e02f9fdbf26fd5e81c9e185b29">More...</a><br/></td></tr>
 <tr class="separator:a076e89e02f9fdbf26fd5e81c9e185b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -148,6 +149,17 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get an <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> instance prepared to animate a float property of the passed object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>Object (likely a view) whose property will be animated. </td></tr>
+    <tr><td class="paramname">propertyName</td><td>The name of the property to animate. </td></tr>
+    <tr><td class="paramname">varArgs</td><td>One or more values to animate from/to. If you pass just one, the animation will begin with the property's current value and animate to the given value. If you pass more than one value, the animation will begin with the first value and proceed through the others to the final value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> ready to animate the given property to the given values. </dd></dl>
 <dl class="section since"><dt>Since</dt><dd>1.0 </dd></dl>
 
 </div>
@@ -190,16 +202,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return an instance of ObjectAnimator. </p>
+<p>Get an <a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> instance prepared to animate an integer property of the passed object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">object</td><td></td></tr>
-    <tr><td class="paramname">propertyName</td><td></td></tr>
-    <tr><td class="paramname">varArgs</td><td></td></tr>
+    <tr><td class="paramname">object</td><td>Object (likely a view) whose property will be animated. </td></tr>
+    <tr><td class="paramname">propertyName</td><td>The name of the property to animate. </td></tr>
+    <tr><td class="paramname">varArgs</td><td>One or more values to animate from/to. If you pass just one, the animation will begin with the property's current value and animate to the given value. If you pass more than one value, the animation will begin with the first value and proceed through the others to the final value. Note that although you will usually pass numbers, you can also pass color values in the form of strings (e.g. "#FFF") and this will convert them automatically to the integer color value. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classcom_1_1billdawson_1_1timodules_1_1animation_1_1_object_animator__.html">ObjectAnimator</a> ready to animate the given property to the given values. </dd></dl>
 <dl class="section since"><dt>Since</dt><dd>1.0 </dd></dl>
 
 </div>
@@ -210,7 +222,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 03:06:30 for Android Animation for Titanium by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 21 2013 15:21:36 for Android Animation for Titanium by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
