@@ -33,6 +33,17 @@ public class ObjectAnimatorFactory extends KrollProxy {
 	private static final String TAG = "ObjectAnimatorFactory";
 
 	/**
+	 * Get an [ObjectAnimator](@ref ObjectAnimator_) instance prepared
+	 * to animate a float property of the passed object.
+	 * @param object		Object (likely a view) whose property will be animated.
+	 * @param propertyName	The name of the property to animate.
+	 * @param varArgs		One or more values to animate from/to. If you pass
+	 * 						just one, the animation will begin with the property's
+	 * 						current value and animate to the given value. If you pass
+	 * 						more than one value, the animation will begin with the first
+	 * 						value and proceed through the others to the final value.
+	 * @return 				[ObjectAnimator](@ref ObjectAnimator_) ready to animate the
+	 * 						given property to the given values.
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -44,11 +55,21 @@ public class ObjectAnimatorFactory extends KrollProxy {
 	}
 
 	/**
-	 * Return an instance of ObjectAnimator.
-	 * @param object
-	 * @param propertyName
-	 * @param varArgs
-	 * @return 
+	 * Get an [ObjectAnimator](@ref ObjectAnimator_) instance prepared
+	 * to animate an integer property of the passed object.
+	 * 
+	 * @param object		Object (likely a view) whose property will be animated.
+	 * @param propertyName	The name of the property to animate.
+	 * @param varArgs		One or more values to animate from/to. If you pass
+	 * 						just one, the animation will begin with the property's
+	 * 						current value and animate to the given value. If you pass
+	 * 						more than one value, the animation will begin with the first
+	 * 						value and proceed through the others to the final value. Note
+	 * 						that although you will usually pass numbers, you can also
+	 * 						pass color values in the form of strings (e.g. "#FFF") and
+	 * 						this will convert them automatically to the integer color value.
+	 * @return 				[ObjectAnimator](@ref ObjectAnimator_) ready to animate the
+	 * 						given property to the given values.
 	 * @since 1.0
 	 */
 	@Kroll.method

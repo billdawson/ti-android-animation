@@ -24,5 +24,18 @@ testList.addEventListener("click", function(e) {
 });
 testList.setData(rows);
 win.add(testList);
+win.addEventListener("open", function() {
+	var module = require("com.billdawson.timodules.animation");
+	module.viewPropertyAnimator.animate(testList)
+	.setDuration(500)
+	.setStartDelay(500)
+	.alpha(0)
+	.withEndAction(function() {
+		module.viewPropertyAnimator.animate(testList)
+		.setStartDelay(0)
+		.alpha(1)
+	});
+});
+
 win.open();
 

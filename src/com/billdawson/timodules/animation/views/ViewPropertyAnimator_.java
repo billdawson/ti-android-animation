@@ -36,8 +36,34 @@ import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
 /**
- * This class provides a fluent interface to quickly and easily
+ * Provides a fluent interface to quickly and easily
  * animate several properties of an Android View.
+ * 
+ * When animating a view, you should attempt to use this
+ * class if possible since it is optimized (within native
+ * Android) for animating views. There will be some cases
+ * when this class won't suffice; see the
+ * [ObjectAnimator](@ref com.billdawson.timodules.animation.ObjectAnimator_)
+ * documentation for some examples of when you might use it instead
+ * of this `ViewPropertyAnimator`.
+ * 
+ * Here's an example of using this class to move a view down and
+ * to the right using an accelerate-decelerate interpolator.
+ * Note how you acquire an instance of this class (`module.viewPropertyAnimator.animate(view)`).
+ * 
+ *     // where "module" is an instance of this module and
+ *     // "view" is a view you've placed on the window already.
+ *     module.viewPropertyAnimator.animate(view)
+ *         .setInterpolator(module.ACCELERATE_DECELERATE_INTERPOLATOR)
+ *         .setDuration(3000)
+ *         .xBy("100dp")
+ *         .yBy("200dp");
+ * 
+ * Note also that you don't need to tell it to start. The `ViewPropertyAnimator`
+ * begins its animation when the call chain is finished.
+ * 
+ * **Do not create an instance using "traditional" Titanium factory methods
+ * such as `module.createViewPropertyAnimator({...})`.**
  * 
  * @since 1.0
  */
@@ -114,7 +140,9 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
-	 * @since 1.0
+	 * Specify the duration of the animation.
+	 * @param	Milliseconds Number of milliseconds (seconds / 1000) over which the animation should run.
+	 * @return	This instance (for method chaining).
 	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setDuration(long milliseconds) {
@@ -123,6 +151,8 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * The duration of the animation.
+	 * @return Milliseconds
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -131,6 +161,8 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * A delay, in milliseconds, before the animation should begin.
+	 * @return Milliseconds
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -139,6 +171,11 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * A delay, in milliseconds, before the animation should begin.
+	 * @param	milliseconds The duration of the delay, after which
+	 * 			the animation should begin changing the view property(ies)
+	 * 			after it has been started.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -148,7 +185,20 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
-	 * @since 1.0
+	 * Specify which interpolator the animation should use.
+	 * 
+	 * For an overview of interpolators, see the
+	 * [Android documentation](http://developer.android.com/reference/android/view/animation/Interpolator.html).
+	 * @param	interpolator		A value indicating which interpolator to use.
+	 * 								The values are in constants on the
+	 * 								[main module class](@ref AndroidAnimation).
+	 * @param	interpolatorValues  One or more values to pass to the interpolator.
+	 * 								Some interpolators accept values to direct/alter
+	 * 								their calculations; the bounce interpolator
+	 * 								is an example of such. See the Android
+	 * 								documentation for more details.
+	 * @return	This instance (for method chaining).
+	 * @since	1.0
 	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setInterpolator(int interpolator,
@@ -162,6 +212,8 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Start the animation. You probably rarely call this since
+	 * the animations start automatically.
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -258,6 +310,7 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Cancel a running animation.
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -284,6 +337,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the alpha (opacity) of the view to the given
+	 * value.
+	 * @param	value	The value to be animated to.
+	 * @returns This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -294,6 +351,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the alpha (opacity) of the view *by* the given
+	 * value.
+	 * @param	value	The value to be animated by, as an offset of the current value.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -304,6 +365,7 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Synonymous with [alpha](@ref #alpha(float)).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -313,6 +375,7 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Synonymous with [alphaBy](@ref #alphaBy(float)).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -322,6 +385,11 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "x" value](http://developer.android.com/reference/android/view/View.html#setX%28float%29)
+	 * to the given value.
+	 * @param	value	The value to animate to. You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -332,6 +400,12 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "x" value](http://developer.android.com/reference/android/view/View.html#setX%28float%29)
+	 * *by* the given value.
+	 * @param	value	The value to animate by as offset of the current value.
+	 * 					You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -342,6 +416,11 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "y" value](http://developer.android.com/reference/android/view/View.html#setY%28float%29)
+	 * to the given value.
+	 * @param	value	The value to animate to. You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -352,6 +431,12 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "y" value](http://developer.android.com/reference/android/view/View.html#setY%28float%29)
+	 * *by* the given value.
+	 * @param	value	The value to animate by as offset of the current value.
+	 * 					You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -422,6 +507,11 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "translationX" value](http://developer.android.com/reference/android/view/View.html#setTranslationX%28float%29)
+	 * to the given value.
+	 * @param	value	The value to animate to. You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -432,6 +522,12 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "translationX" value](http://developer.android.com/reference/android/view/View.html#setTranslationX%28float%29)
+	 * *by* the given value.
+	 * @param	value	The value to animate by as offset of the current value.
+	 * 					You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -442,6 +538,11 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "translationY" value](http://developer.android.com/reference/android/view/View.html#setTranslationY%28float%29)
+	 * to the given value.
+	 * @param	value	The value to animate to. You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -452,6 +553,12 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "translationY" value](http://developer.android.com/reference/android/view/View.html#setTranslationY%28float%29)
+	 * *by* the given value.
+	 * @param	value	The value to animate by as offset of the current value.
+	 * 					You can pass a string that contains units,
+	 * 					such as "12dp", and the calculation will be done for you.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -462,6 +569,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "scaleX" value](http://developer.android.com/reference/android/view/View.html#setScaleX%28float%29)
+	 * to the given value.
+	 * @param	value	The scaling factor value to animate to. A value of 1 means the true size in the layout (i.e., no scaling).
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -472,6 +583,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "scaleX" value](http://developer.android.com/reference/android/view/View.html#setScaleX%28float%29)
+	 * *by* the given value.
+	 * @param	value	The scaling factor value to animate by, as an offset of the current scaling factor.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -482,6 +597,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "scaleY" value](http://developer.android.com/reference/android/view/View.html#setScaleY%28float%29)
+	 * to the given value.
+	 * @param	value	The scaling factor value to animate to. A value of 1 means the true size in the layout (i.e., no scaling).
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -492,6 +611,10 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
+	 * Animate the view's [native "scaleY" value](http://developer.android.com/reference/android/view/View.html#setScaleX%28float%29)
+	 * *by* the given value.
+	 * @param	value	The scaling factor value to animate by, as an offset of the current scaling factor.
+	 * @return	This instance (for method chaining).
 	 * @since 1.0
 	 */
 	@Kroll.method
@@ -502,7 +625,16 @@ public class ViewPropertyAnimator_ extends KrollProxy implements
 	}
 
 	/**
-	 * @since 1.0
+	 * A function (callback) to be called when the animation starts, ends or is canceled.
+	 * 
+	 * As an alternative to this, see [withStartAction](@ref withStartAction) and
+	 * [withEndAction](@ref withEndAction).
+	 * @param	func	The callback function. When called, it will be passed a single argument object, which mimics
+	 * 					standard Titanium event listeners. The argument object's `type` property
+	 * 					will be set to "start", "end" or "cancel", depending on the event provoking
+	 * 					the callback. 
+	 * @return	This instance (for method chaining).
+	 * @since	1.0
 	 */
 	@Kroll.method
 	public ViewPropertyAnimator_ setListener(KrollFunction func) {

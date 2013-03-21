@@ -46,10 +46,7 @@ exports.run = function() {
 				.setStartDelay(2000)
 				.xBy("-200dp")
 				.yBy("-250dp")
-				.rotationBy(-360*4)
-				.withEndAction(function() {
-					button.enabled = true;
-				});
+				.rotationBy(-360*4);
 			});
 		animMod.viewPropertyAnimator.animate(view3)
 			.setInterpolator(animMod.BOUNCE_INTERPOLATOR)
