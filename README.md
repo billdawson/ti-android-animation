@@ -1,5 +1,11 @@
-Android Animation for Titanium
+(ABANDONED) Android Animation for Titanium
 ================================
+
+Project Abandoned
+==================
+
+**PLEASE NOTE**: I no longer work with Titanium and have abandoned this module.
+I recommend you fork this project or find another fork that is maintained.
 
 Quick links:
 
